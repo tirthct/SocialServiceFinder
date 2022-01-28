@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.socialservicefinder</groupId>
-	<artifactId>userservice</artifactId>
+	<artifactId>organizationservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>userservice</name>
+	<name>organizationservice</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
