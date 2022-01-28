@@ -1,6 +1,5 @@
 package com.socialservicefinder.organizationservice.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
