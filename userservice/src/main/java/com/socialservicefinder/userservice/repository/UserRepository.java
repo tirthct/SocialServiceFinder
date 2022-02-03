@@ -1,4 +1,4 @@
-package com.socialservicefinder.userservice;
+package com.socialservicefinder.userservice.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
