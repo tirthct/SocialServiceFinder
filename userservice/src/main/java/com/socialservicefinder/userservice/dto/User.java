@@ -3,7 +3,12 @@ package com.socialservicefinder.userservice.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+
+
 public class User {
+	
+	@Id
 	private long id;
 	private String name;
 	private String email;
