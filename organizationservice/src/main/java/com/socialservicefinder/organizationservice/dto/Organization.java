@@ -16,19 +16,6 @@ public class Organization {
 	private long pinCode;
 	private OrganizationTypes organization_type;
 
-	public Organization(long id, String name, String email, String phoneNo, String address, String city,
-						long pinCode, OrganizationTypes organization_type) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.phoneNo = phoneNo;
-		this.address = address;
-		this.city = city;
-		this.pinCode = pinCode;
-		this.organization_type = organization_type;
-	}
-
 	@Override
 	public String toString() {
 		return "Organization [id=" + id + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
