@@ -12,6 +12,7 @@ public class User {
 	private String address;
 	private String city;
 	private long pinCode;
+	private List<OrganizationTypes> preferences;
 
 	public User(long id, String name, String email, LocalDate dob, String phoneNo, String address, String city,
 			long pinCode, List<OrganizationTypes> preferences) {
@@ -123,5 +124,5 @@ public class User {
 		this.preferences = preferences;
 	}
 
-	private List<OrganizationTypes> preferences;
+
 }
