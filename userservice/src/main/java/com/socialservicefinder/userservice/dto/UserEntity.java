@@ -3,7 +3,15 @@ package com.socialservicefinder.userservice.dto;
 import java.time.LocalDate;
 import java.util.List;
 
-public class User {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Document("users")
+public class UserEntity {
+	
+	@Id
+	private long id;
 	private String name;
 	private String email;
 	private LocalDate dob;
@@ -11,19 +19,33 @@ public class User {
 	private String address;
 	private String city;
 	private long pinCode;
-	private List<OrganizationTypes> preferences;
+
+	public UserEntity(long id, String name, String email, LocalDate dob, String phoneNo, String address, String city,
+			long pinCode, List<OrganizationTypes> preferences) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.dob = dob;
+		this.phoneNo = phoneNo;
+		this.address = address;
+		this.city = city;
+		this.pinCode = pinCode;
+		this.preferences = preferences;
+	}
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", dob=" + dob + ", phoneNo=" + phoneNo + ", address="
-				+ address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", dob=" + dob + ", phoneNo=" + phoneNo
+				+ ", address=" + address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences
+				+ "]";
 	}
 
-	public User() {
+	public UserEntity() {
 		super();
 	}
 
-	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, long pinCode,
+	public UserEntity(String name, String email, LocalDate dob, String phoneNo, String address, String city, long pinCode,
 			List<OrganizationTypes> preferences) {
 		super();
 		this.name = name;
@@ -34,6 +56,14 @@ public class User {
 		this.city = city;
 		this.pinCode = pinCode;
 		this.preferences = preferences;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -100,5 +130,5 @@ public class User {
 		this.preferences = preferences;
 	}
 
-
+	private List<OrganizationTypes> preferences;
 }
