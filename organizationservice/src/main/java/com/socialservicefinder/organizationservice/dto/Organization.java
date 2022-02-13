@@ -1,10 +1,13 @@
 package com.socialservicefinder.organizationservice.dto;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.UUID;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document("organizations")
 public class Organization {
-	private long id;
+	@Id
+	private String id;
 	private String name;
 	private String email;
 	private String phoneNo;
@@ -12,19 +15,6 @@ public class Organization {
 	private String city;
 	private long pinCode;
 	private OrganizationTypes organization_type;
-
-	public Organization(long id, String name, String email, String phoneNo, String address, String city,
-						long pinCode, OrganizationTypes organization_type) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.phoneNo = phoneNo;
-		this.address = address;
-		this.city = city;
-		this.pinCode = pinCode;
-		this.organization_type = organization_type;
-	}
 
 	@Override
 	public String toString() {
@@ -39,7 +29,8 @@ public class Organization {
 
 	public Organization(String name, String email, String phoneNo, String address, String city, long pinCode,
 						OrganizationTypes organization_type) {
-		super();
+		//TODO: Add check for unique uuid.
+		this.id = UUID.randomUUID().toString();
 		this.name = name;
 		this.email = email;
 		this.phoneNo = phoneNo;
@@ -49,11 +40,11 @@ public class Organization {
 		this.organization_type = organization_type;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
