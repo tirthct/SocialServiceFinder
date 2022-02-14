@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './user';
+import { User } from '../../models/user';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -20,5 +20,4 @@ export class UserregistrationService {
   public addUser(User: User): Observable<User>{
     return this.http.post<User>(`${this.apiServerUrl}/addUser`, User);
   }
-
 }
