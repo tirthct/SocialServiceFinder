@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 import { AppComponent } from './app.component';
-import { UserregistrationService } from './userregistration.service';
+import { UserregistrationService } from './users/services/userregistrationservice/userregistration.service';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 @NgModule({
