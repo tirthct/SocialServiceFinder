@@ -10,17 +10,15 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 
 //Implementing OnInit will call ngOnInit function when the component is initialized.
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'socialseriveapp';
   public users: User[];
 
-  constructor(private userRegistrationService: UserregistrationService){
+  constructor(private userRegistrationService: UserregistrationService) {
     this.users = [];
   }
 
-  ngOnInit(): void {
-      this.getUsers();
-  }
+  ngOnInit(): void { }
 
   public getUsers(): void {
     this.userRegistrationService.getUser().subscribe({
