@@ -18,8 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ContactusComponent } from './homepage/contactus/contactus.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 
-@NgModule({
-  
+@NgModule({ 
   declarations: [
     AppComponent,
     RegistrationFormComponent,
