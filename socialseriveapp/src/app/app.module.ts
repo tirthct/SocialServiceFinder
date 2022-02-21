@@ -12,11 +12,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { ContactusComponent } from './homepage/contactus/contactus.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({ 
   declarations: [
@@ -36,7 +39,10 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     MatToolbarModule,
     MatButtonModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

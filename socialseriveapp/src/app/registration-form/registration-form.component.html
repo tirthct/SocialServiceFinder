@@ -1,4 +1,63 @@
-<form>
-    Registration works!
-</form>
+<mat-card class = "form-container">
+    <mat-card-title>User Registration</mat-card-title>
+    <form>
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>First Name</mat-label>
+            <input matInput type  ="text" placeholder="Ex. John">
+        </mat-form-field>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput type  ="text" placeholder="Ex. Doe">
+        </mat-form-field><br>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Phone No</mat-label>
+            <input matInput type  ="text"  placeholder="Ex. 1234567890">
+        </mat-form-field>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Preference</mat-label>
+            <mat-select multiple>
+                <mat-option>NGO</mat-option>
+                <mat-option>PETA</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Address Line #1</mat-label>
+            <input matInput type  ="text"  placeholder="Ex. Lombard Street">
+        </mat-form-field>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>City</mat-label>
+            <input matInput type  ="text"  placeholder="Ex. San Francisco">
+        </mat-form-field><br>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>State</mat-label>
+            <input matInput type  ="text"  placeholder="Ex. California">
+        </mat-form-field>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Pincode</mat-label>
+            <input matInput type  ="text"  placeholder="Ex. 12345">
+        </mat-form-field><br>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Password</mat-label>
+            <input matInput type  ="password"  placeholder="**********">
+        </mat-form-field>
+
+        <mat-form-field appearance = "outline" class = "form-input-field">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type  ="password"  placeholder="**********">
+        </mat-form-field><br>
+
+        <mat-card-actions align="end">
+            <button mat-button>Register</button>
+            <button mat-button>Clear</button>
+        </mat-card-actions>
+    </form>
+</mat-card>
 
