@@ -13,19 +13,28 @@ import com.socialservicefinder.organizationservice.repository.OrganizationReposi
 @Component
 public class OrganizationService {
     private final OrganizationRepository organizationRepository;
+    private final Codec codec;
 
     @Autowired
-    public OrganizationService(OrganizationRepository organizationRepository) {
+    public OrganizationService(OrganizationRepository organizationRepository) throws Exception {
         this.organizationRepository = organizationRepository;
+        this.codec = new Codec();
     }
 
     public List<Organization> getOrganizations(){
-        return organizationRepository.findAll();
+        List<Organization> organizations = organizationRepository.findAll();
+        for(Organization organization: organizations){
+            organization.setPassword(codec.decrypt(organization.getPassword()));
+        }
+        return organizations;
     }
 
     public void addOrganization(Organization organization) {
-        if(organization == null || organization.getEmail() == null || organization.getName() == null)
-            throw new IllegalArgumentException("organization, email or name cannot be null or empty");
+        if(organization == null || organization.getEmail() == null || organization.getName() == null
+                || organization.getPassword() == null)
+            throw new IllegalArgumentException("organization, email, name or password cannot be null or empty");
+
+        organization.setPassword(codec.encrypt(organization.getPassword()));
         organizationRepository.insert(organization);
     }
 }

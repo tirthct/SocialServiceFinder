@@ -13,6 +13,7 @@ public class Organization {
 	private String phoneNo;
 	private String address;
 	private String city;
+	private String password;
 	private long pinCode;
 	private OrganizationTypes organization_type;
 
@@ -20,15 +21,15 @@ public class Organization {
 	public String toString() {
 		return "Organization [id=" + id + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
 				+ ", address=" + address + ", city=" + city + ", pinCode=" + pinCode + ", organization_type="
-				+ organization_type + "]";
+				+ organization_type + ", password=" + password + "]";
 	}
 
 	public Organization() {
 		super();
 	}
 
-	public Organization(String name, String email, String phoneNo, String address, String city, long pinCode,
-						OrganizationTypes organization_type) {
+	public Organization(String name, String email, String phoneNo, String address, String city, String password,
+						long pinCode, OrganizationTypes organization_type) {
 		//TODO: Add check for unique uuid.
 		this.id = UUID.randomUUID().toString();
 		this.name = name;
@@ -36,6 +37,7 @@ public class Organization {
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.city = city;
+		this.password = password;
 		this.pinCode = pinCode;
 		this.organization_type = organization_type;
 	}
@@ -94,6 +96,14 @@ public class Organization {
 
 	public void setPinCode(long pinCode) {
 		this.pinCode = pinCode;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public OrganizationTypes getOrganizationType() {
