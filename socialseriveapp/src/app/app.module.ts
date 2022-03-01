@@ -20,6 +20,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { ContactusComponent } from './homepage/contactus/contactus.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { LoginComponent } from './login/login.component';
+
+
+
 
 @NgModule({ 
   declarations: [
@@ -27,7 +35,8 @@ import {MatSelectModule} from '@angular/material/select';
     RegistrationFormComponent,
     HomepageComponent,
     ContactusComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +51,11 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatRadioModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

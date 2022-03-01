@@ -1,4 +1,4 @@
-export interface User{
+export interface UserOrg{
     // id: number;
 	name: string;
 	email: string;
@@ -7,5 +7,5 @@ export interface User{
 	address: string;
 	city: string;
 	pinCode: number;
-    preferences: string[];
+    organization_type: string;
 }

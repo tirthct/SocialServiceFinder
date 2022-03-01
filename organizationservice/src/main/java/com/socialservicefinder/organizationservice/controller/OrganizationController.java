@@ -2,6 +2,7 @@ package com.socialservicefinder.organizationservice.controller;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,8 @@ public class OrganizationController {
     public ResponseEntity<String> addOrganization(@RequestBody Organization organization) {
         try {
             organizationService.addOrganization(organization);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
         }
         catch (InvalidOrganizationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

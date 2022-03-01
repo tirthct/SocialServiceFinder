@@ -20,3 +20,13 @@ mat-card-title{
     position: relative;
     padding-top: 5%;
 }
+
+mat-radio-button{
+    position: relative;
+    padding: 1rem;
+}
+
+#dobForm{
+    position: relative;
+    width: 46%;
+}
