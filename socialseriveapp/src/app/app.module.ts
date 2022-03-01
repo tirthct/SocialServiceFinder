@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 
 import { AppComponent } from './app.component';
-import { UserregistrationService } from './users/services/userregistrationservice/userregistration.service';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

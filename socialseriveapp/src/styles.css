@@ -3,5 +3,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto; background-color: azure; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.errorHint{
+    color: rgb(212, 16, 16);
+}
