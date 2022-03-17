@@ -14,6 +14,7 @@ public class User {
 	private String city;
 	private String password;
 	private long pinCode;
+	private List<OrganizationTypes> preferences;
 
 	@Override
 	public String toString() {
@@ -111,5 +112,5 @@ public class User {
 		this.preferences = preferences;
 	}
 
-	private List<OrganizationTypes> preferences;
+
 }

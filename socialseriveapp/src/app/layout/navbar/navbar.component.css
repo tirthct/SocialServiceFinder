@@ -1,0 +1,12 @@
+.nav{
+	flex: 1 1 auto;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+ 
+a:hover, a:active{
+    color: lightgray;
+}

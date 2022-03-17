@@ -1,0 +1,23 @@
+.bodyText{
+	margin: auto;
+	width: 90%;
+	font-size: 2rem;
+	background-color: #A7E6F8;
+	padding: 0.938rem;
+	border-radius: 0.938rem;
+	float: left;
+	clear: left;
+}
+
+.imgCard {
+  max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+ 
+a:hover, a:active{
+    color: lightgray;
+}
