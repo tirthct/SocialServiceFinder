@@ -1,5 +1,7 @@
 package com.socialservicefinder.userservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class User {
 	private String phoneNo;
 	private String address;
 	private String city;
+	private String password;
 	private long pinCode;
 	private List<OrganizationTypes> preferences;
 
@@ -23,8 +26,8 @@ public class User {
 		super();
 	}
 
-	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, long pinCode,
-			List<OrganizationTypes> preferences) {
+	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, String password,
+				long pinCode, List<OrganizationTypes> preferences) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -32,6 +35,7 @@ public class User {
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.city = city;
+		this.password = password;
 		this.pinCode = pinCode;
 		this.preferences = preferences;
 	}
@@ -82,6 +86,14 @@ public class User {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public long getPinCode() {

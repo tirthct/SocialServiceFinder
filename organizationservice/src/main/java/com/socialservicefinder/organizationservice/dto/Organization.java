@@ -1,6 +1,7 @@
 package com.socialservicefinder.organizationservice.dto;
 
 import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +14,7 @@ public class Organization {
 	private String phoneNo;
 	private String address;
 	private String city;
+	private String password;
 	private long pinCode;
 	private OrganizationTypes organization_type;
 
@@ -27,8 +29,8 @@ public class Organization {
 		super();
 	}
 
-	public Organization(String name, String email, String phoneNo, String address, String city, long pinCode,
-						OrganizationTypes organization_type) {
+	public Organization(String name, String email, String phoneNo, String address, String city, String password,
+						long pinCode, OrganizationTypes organization_type) {
 		//TODO: Add check for unique uuid.
 		this.id = UUID.randomUUID().toString();
 		this.name = name;
@@ -36,6 +38,7 @@ public class Organization {
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.city = city;
+		this.password = password;
 		this.pinCode = pinCode;
 		this.organization_type = organization_type;
 	}
@@ -94,6 +97,14 @@ public class Organization {
 
 	public void setPinCode(long pinCode) {
 		this.pinCode = pinCode;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public OrganizationTypes getOrganizationType() {

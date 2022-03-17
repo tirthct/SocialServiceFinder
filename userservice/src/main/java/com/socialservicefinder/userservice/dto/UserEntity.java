@@ -18,10 +18,11 @@ public class UserEntity {
 	private String phoneNo;
 	private String address;
 	private String city;
+	private String password;
 	private long pinCode;
 
 	public UserEntity(long id, String name, String email, LocalDate dob, String phoneNo, String address, String city,
-			long pinCode, List<OrganizationTypes> preferences) {
+					  String password, long pinCode, List<OrganizationTypes> preferences) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,6 +32,7 @@ public class UserEntity {
 		this.address = address;
 		this.city = city;
 		this.pinCode = pinCode;
+		this.password = password;
 		this.preferences = preferences;
 	}
 
@@ -45,8 +47,8 @@ public class UserEntity {
 		super();
 	}
 
-	public UserEntity(String name, String email, LocalDate dob, String phoneNo, String address, String city, long pinCode,
-			List<OrganizationTypes> preferences) {
+	public UserEntity(String name, String email, LocalDate dob, String phoneNo, String address, String city,
+					  String password, long pinCode, List<OrganizationTypes> preferences) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -55,6 +57,7 @@ public class UserEntity {
 		this.address = address;
 		this.city = city;
 		this.pinCode = pinCode;
+		this.password = password;
 		this.preferences = preferences;
 	}
 
@@ -120,6 +123,14 @@ public class UserEntity {
 
 	public void setPinCode(long pinCode) {
 		this.pinCode = pinCode;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public List<OrganizationTypes> getPreferences() {
