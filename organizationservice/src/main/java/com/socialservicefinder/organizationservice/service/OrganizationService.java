@@ -22,11 +22,7 @@ public class OrganizationService {
     }
 
     public List<Organization> getOrganizations(){
-        List<Organization> organizations = organizationRepository.findAll();
-        for(Organization organization: organizations){
-            organization.setPassword(codec.decrypt(organization.getPassword()));
-        }
-        return organizations;
+        return organizationRepository.findAll();
     }
 
     public void addOrganization(Organization organization) {

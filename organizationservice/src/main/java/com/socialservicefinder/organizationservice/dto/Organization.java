@@ -1,6 +1,7 @@
 package com.socialservicefinder.organizationservice.dto;
 
 import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,7 +22,7 @@ public class Organization {
 	public String toString() {
 		return "Organization [id=" + id + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
 				+ ", address=" + address + ", city=" + city + ", pinCode=" + pinCode + ", organization_type="
-				+ organization_type + ", password=" + password + "]";
+				+ organization_type + "]";
 	}
 
 	public Organization() {
