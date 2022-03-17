@@ -1,11 +1,16 @@
 package com.socialservicefinder.userservice.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.UUID;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Document("users")
 public class User {
+	@Id
+	private String id;
 	private String name;
 	private String email;
 	private LocalDate dob;
@@ -28,7 +33,6 @@ public class User {
 
 	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, String password,
 				long pinCode, List<OrganizationTypes> preferences) {
-		super();
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
@@ -38,6 +42,10 @@ public class User {
 		this.password = password;
 		this.pinCode = pinCode;
 		this.preferences = preferences;
+	}
+
+	public void assign_id(){
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public String getName() {
@@ -111,6 +119,4 @@ public class User {
 	public void setPreferences(List<OrganizationTypes> preferences) {
 		this.preferences = preferences;
 	}
-
-
 }
