@@ -3,6 +3,8 @@ package com.socialservicefinder.organizationservice.service;
 import java.util.List;
 
 import com.mongodb.MongoWriteException;
+import com.socialservicefinder.organizationservice.dto.Login;
+import com.socialservicefinder.organizationservice.exceptions.InvalidLoginException;
 import com.socialservicefinder.organizationservice.exceptions.InvalidOrganizationException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -53,5 +55,20 @@ public class OrganizationService {
         }
         if(!id_assigned)
             throw new InvalidOrganizationException("Please try after sometime.");
+    }
+
+    public Organization getAuthOrganization(Login login){
+        if(login == null || login.getEmail()==null || login.getPassword() == null)
+            throw new IllegalArgumentException("Login object or email or password cannot be null");
+
+        login.setPassword(codec.encrypt(login.getPassword()));
+        Organization organization =organizationRepository.findOrganizationByEmail(login.getEmail());
+
+        if(organization!=null && organization.getPassword().equals(login.getPassword())) {
+            System.out.println(organization);
+            return organization;
+        }
+        else
+            throw new InvalidLoginException("Authentication Failed");
     }
 }

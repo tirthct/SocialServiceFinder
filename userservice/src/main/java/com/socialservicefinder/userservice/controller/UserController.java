@@ -2,6 +2,8 @@ package com.socialservicefinder.userservice.controller;
 
 import java.util.List;
 
+import com.socialservicefinder.userservice.dto.Login;
+import com.socialservicefinder.userservice.exceptions.InvalidLoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,20 @@ public class UserController {
 	}
 
 
+	@PostMapping("/login")
+	public ResponseEntity<User> authUser(@RequestBody Login login){
+		try{
+			var user = userService.getAuthUser(login);
+			return ResponseEntity.status(HttpStatus.OK).body(user);
+		}
+		catch (InvalidLoginException e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		catch (Exception e){
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
 	@GetMapping
 	public List<User> getUsers() {
 		return userService.getUsers();
@@ -45,4 +61,8 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 	}
+
+
+
 }
+

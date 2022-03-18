@@ -1,0 +1,16 @@
+<p>Hello {{isUser?user.name:organisation.name}} </p>
+<mat-card class = "form-container">
+    <mat-card-title><p>{{isUser?user.name:organisation.name}}</p></mat-card-title>
+    <mat-card-content><p>Email: {{isUser?user.email :organisation.email}}</p></mat-card-content><br>
+    <mat-divider inset></mat-divider>
+    <mat-card-content><p>Phone No: {{isUser?user.phoneNo :organisation.phoneNo}}</p></mat-card-content><br>
+    <mat-divider inset></mat-divider>
+    <mat-card-content><p>Date of Birth: {{isUser?user.dob :organisation.dob}}</p></mat-card-content><br>
+    <mat-divider inset></mat-divider>
+    <mat-card-content><p>Address: {{isUser?user.address :organisation.address}}</p></mat-card-content><br>
+    <mat-divider inset></mat-divider>
+    <mat-card-content *ngIf="isUser"><p>Preference: {{user.preferences}}</p></mat-card-content><br>
+    <mat-divider inset *ngIf="isUser"></mat-divider>
+    <mat-card-content *ngIf="!isUser"><p>Organisation Type: {{organisation.organizationType}}</p></mat-card-content><br>
+    <mat-divider inset *ngIf="!isUser"></mat-divider>
+</mat-card>

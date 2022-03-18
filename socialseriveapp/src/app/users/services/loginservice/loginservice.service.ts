@@ -3,6 +3,8 @@ import { Login } from '../../models/Login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { Organiser } from '../../models/Organiser';
+import { User } from '../../models/User';
 
 const httpOptions = {
   header: new HttpHeaders({
@@ -20,16 +22,12 @@ export class LoginserviceService {
 
   constructor(private http: HttpClient) { }
 
-  public loginUser(login: Login): Observable<Login>{
-    console.log("Sending Login Info to Userservice");
-    console.log(login.email);
-    return this.http.post<Login>(`${this.apiServerUrlUser}/user/login`,login);
+  public loginUser(login: Login): Observable<User>{
+    return this.http.post<User>(`${this.apiServerUrlUser}/user/login`,login);
   }
 
-  public loginOrganiser(login: Login): Observable<Login>{
-    console.log("Sending Login Info to Organisationservice");
-    console.log(login.email);
-    return this.http.post<Login>(`${this.apiServerUrlOrg}/organization/login`,login);
+  public loginOrganiser(login: Login): Observable<Organiser>{
+    return this.http.post<Organiser>(`${this.apiServerUrlOrg}/organization/login`,login);
   }
   
 }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { UserregistrationService } from '../users/services/userregistrationservice/userregistration.service';
 import { OrganisationregistrationserviceService } from '../users/services/organisationregistrationservice/organisationregistrationservice.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, _SnackBarContainer } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -39,9 +40,13 @@ export class RegistrationFormComponent implements OnInit {
 
   emailFormat = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  
   constructor(private userRegistrationService: UserregistrationService,
     private router: Router,
-    private organisationRegistrationService: OrganisationregistrationserviceService) {
+    private organisationRegistrationService: OrganisationregistrationserviceService,
+    private _snackBar: MatSnackBar) {
 
   }
 
@@ -62,8 +67,16 @@ export class RegistrationFormComponent implements OnInit {
         password: this.password,
         preferences: this.prefs,
       }
-      this.userRegistrationService.addUser(this.user).subscribe();
-      this.router.navigateByUrl('/login');
+      this.userRegistrationService.addUser(this.user).subscribe((res)=>{
+        this.router.navigateByUrl('/login');
+      },
+      (err)=>{
+        this._snackBar.open('Registration Failed!!', "",{
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 2000,
+        });
+      });
     }
     else if (this.userType == "Organiser") {
       this.organiser = {
@@ -77,8 +90,16 @@ export class RegistrationFormComponent implements OnInit {
         password: this.password,
         organizationType: this.orgTypeChosen,
       }
-      this.organisationRegistrationService.addOrganiser(this.organiser).subscribe();
-      this.router.navigateByUrl('/login');
+      this.organisationRegistrationService.addOrganiser(this.organiser).subscribe((res)=>{
+        this.router.navigateByUrl('/login');
+      },
+      (err)=>{
+        this._snackBar.open('Registration Failed!!', "",{
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 2000,
+        });
+      });
     }
   }
 
