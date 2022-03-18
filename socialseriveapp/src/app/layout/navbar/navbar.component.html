@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
 	<mat-toolbar-row>
-    <a routerLink="">
+    <a id="homeBtn" routerLink="">
       Social Service Finder
     </a>
 		<div class="nav"></div>
@@ -8,8 +8,8 @@
 			<span>
 				<button mat-button>
 					Login </button>
-				<button mat-button [routerLink]="['/register']"> Register </button>
-				<button mat-button [routerLink]="['/contact']"> Contact us </button>
+				<button id="registerBtn" mat-button [routerLink]="['/register']"> Register </button>
+				<button id="contactusBtn" mat-button [routerLink]="['/contact']"> Contact us </button>
 			</span>
 		</nav>
 	</mat-toolbar-row>
