@@ -35,7 +35,8 @@ public class UserserviceApplicationIntegrationTests {
 	@Test
 	public void post_endpoint_should_return_ok() throws Exception {
 		User user = new User("Jack Doe", "jackdoe@gmail.com", null, "999-999-9999",
-				"Univesity of California, Irvine", "Irvine", 92612, List.of(OrganizationTypes.environmental));
+				"Univesity of California, Irvine", "Irvine", "demopass", 92612,
+				List.of(OrganizationTypes.environmental));
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		this.mockMvc.perform(
@@ -46,7 +47,8 @@ public class UserserviceApplicationIntegrationTests {
 	@Test
 	public void post_endpoint_null_name_should_return_badRequest() throws Exception {
 		User user = new User(null, "jackdoe@gmail.com", null, "999-999-9999",
-				"Univesity of California, Irvine", "Irvine", 92612, List.of(OrganizationTypes.environmental));
+				"Univesity of California, Irvine", "Irvine", "demopass", 92612,
+				List.of(OrganizationTypes.environmental));
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		this.mockMvc.perform(
@@ -57,7 +59,8 @@ public class UserserviceApplicationIntegrationTests {
 	@Test
 	public void post_endpoint_null_email_should_return_badRequest() throws Exception {
 		User user = new User("Jack doe", null, null, "999-999-9999",
-				"Univesity of California, Irvine", "Irvine", 92612, List.of(OrganizationTypes.environmental));
+				"Univesity of California, Irvine", "Irvine", "demopass", 92612,
+				List.of(OrganizationTypes.environmental));
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(user);
 		this.mockMvc.perform(

@@ -1,9 +1,8 @@
 package com.socialservicefinder.userservice.repository;
 
+import com.socialservicefinder.userservice.dto.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.socialservicefinder.userservice.dto.UserEntity;
-
-public interface UserRepository extends MongoRepository<UserEntity, Long>{
+public interface UserRepository extends MongoRepository<User, Long>{
 	
 }
