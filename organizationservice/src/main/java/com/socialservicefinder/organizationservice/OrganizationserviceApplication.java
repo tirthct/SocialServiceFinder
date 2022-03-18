@@ -10,7 +10,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class OrganizationserviceApplication{
+public class OrganizationserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationserviceApplication.class, args);
 	}

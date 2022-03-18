@@ -1,15 +1,23 @@
 package com.socialservicefinder.userservice.dto;
 
+import java.util.UUID;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@Document("users")
 public class User {
+	@Id
+	private String id;
 	private String name;
 	private String email;
 	private LocalDate dob;
 	private String phoneNo;
 	private String address;
 	private String city;
+	private String password;
 	private long pinCode;
 	private List<OrganizationTypes> preferences;
 
@@ -23,17 +31,21 @@ public class User {
 		super();
 	}
 
-	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, long pinCode,
-			List<OrganizationTypes> preferences) {
-		super();
+	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, String password,
+				long pinCode, List<OrganizationTypes> preferences) {
 		this.name = name;
 		this.email = email;
 		this.dob = dob;
 		this.phoneNo = phoneNo;
 		this.address = address;
 		this.city = city;
+		this.password = password;
 		this.pinCode = pinCode;
 		this.preferences = preferences;
+	}
+
+	public void assign_id(){
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public String getName() {
@@ -84,6 +96,14 @@ public class User {
 		this.city = city;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public long getPinCode() {
 		return pinCode;
 	}
@@ -99,6 +119,4 @@ public class User {
 	public void setPreferences(List<OrganizationTypes> preferences) {
 		this.preferences = preferences;
 	}
-
-
 }
