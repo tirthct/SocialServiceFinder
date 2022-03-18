@@ -6,5 +6,6 @@ export interface User {
 	address: string;
 	city: string;
 	pinCode: number;
+	password: string;
 	preferences: string[];
 }

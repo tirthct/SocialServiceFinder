@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../users/models/user';
+import { User } from '../users/models/User';
 import { Organiser } from '../users/models/Organiser';
 import { Router } from '@angular/router';
 
@@ -54,6 +54,7 @@ export class RegistrationFormComponent implements OnInit {
         address: `${this.addr}, ${this.city}, ${this.state}, ${this.pincode}`,
         city: this.city,
         pinCode: Number(this.pincode),
+        password: this.password,
         preferences: this.prefs,
       }
       this.userRegistrationService.addUser(this.user).subscribe();
@@ -68,6 +69,7 @@ export class RegistrationFormComponent implements OnInit {
         address: `${this.addr}, ${this.city}, ${this.state}, ${this.pincode}`,
         city: this.city,
         pinCode: Number(this.pincode),
+        password: this.password,
         organizationType: this.orgTypeChosen,
       }
       this.organisationRegistrationService.addOrganiser(this.organiser).subscribe();

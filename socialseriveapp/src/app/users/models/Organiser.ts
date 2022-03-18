@@ -6,5 +6,6 @@ export interface Organiser {
 	address: string;
 	city: string;
 	pinCode: number;
+	password: string;
 	organizationType: string;
 }
