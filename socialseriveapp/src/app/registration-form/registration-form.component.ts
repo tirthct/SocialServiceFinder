@@ -14,7 +14,11 @@ import { OrganisationregistrationserviceService } from '../users/services/organi
 export class RegistrationFormComponent implements OnInit {
   userType: string = "User";
   currDate: Date = new Date;
+
   options: string[] = ['User', 'Organiser'];
+
+  /*TO DO: The orgTypes should ideally be populated each time form the database to keep the 
+  list of organisation type updated with the organisation types already present in the database*/
   orgTypes: string[] = ['orphanage', 'oldage', 'environmental'];
   fName: string = "";
   lName: string = "";
@@ -44,6 +48,7 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //To Do: Register button should be disabled untill all the fields are valid
   register(): void {
     if (this.userType == "User") {
       this.user = {

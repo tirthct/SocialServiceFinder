@@ -9,18 +9,18 @@
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>First Name</mat-label>
-            <input required="required" matInput type="text" placeholder="Ex. John" name="fName" id="fName"
+            <input required="required" matInput type="text" placeholder="Eg. John" name="fName" id="fName"
                 [(ngModel)]="fName">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>Last Name</mat-label>
-            <input matInput type="text" placeholder="Ex. John" name="lName" id="lName" [(ngModel)]="lName">
+            <input matInput type="text" placeholder="Eg. Doe" name="lName" id="lName" [(ngModel)]="lName">
         </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>Phone No</mat-label>
-            <input required="required" matInput type="text" placeholder="Ex. 1234567890" name="phNo" id="phNo"
+            <input required="required" matInput type="text" placeholder="Eg. 1234567890" name="phNo" id="phNo"
                 [(ngModel)]="phNo">
             <mat-hint align="start" *ngIf="phNo.length!=10 || !isNumber(phNo)" class="errorHint">Should be 10 digits
             </mat-hint>
@@ -36,24 +36,24 @@
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>Address Line #1</mat-label>
-            <input required="required" matInput type="text" placeholder="Ex. Lombard Street" name="addr" id="addr"
+            <input required="required" matInput type="text" placeholder="Eg. Lombard Street" name="addr" id="addr"
                 [(ngModel)]="addr">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>City</mat-label>
-            <input required="required" matInput type="text" placeholder="Ex. San Francisco" name="city" id="city"
+            <input required="required" matInput type="text" placeholder="Eg. San Francisco" name="city" id="city"
                 [(ngModel)]="city">
         </mat-form-field><br>
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>State</mat-label>
-            <input matInput type="text" placeholder="Ex. California" name="state" id="state" [(ngModel)]="state">
+            <input matInput type="text" placeholder="Eg. California" name="state" id="state" [(ngModel)]="state">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-input-field">
             <mat-label>Pincode</mat-label>
-            <input required="required" matInput type="text" placeholder="Ex. 12345" name="pincode" id="pincode"
+            <input required="required" matInput type="text" placeholder="Eg. 12345" name="pincode" id="pincode"
                 [(ngModel)]="pincode">
             <mat-hint align="start" *ngIf="pincode.length!=5 || !isNumber(pincode)" class="errorHint">Should be 5 digits
             </mat-hint>
@@ -61,7 +61,7 @@
 
         <mat-form-field appearance="outline" class="form-input-field" id="emailForm">
             <mat-label>Email</mat-label>
-            <input required="required" matInput type="text" placeholder="Ex. johndoe@gmail.com" name="email" id="email"
+            <input required="required" matInput type="text" placeholder="Eg. johndoe@gmail.com" name="email" id="email"
                 [(ngModel)]="email">
             <mat-hint align="start" *ngIf="!emailFormat.test(email)" class="errorHint">Invalid Format</mat-hint>
         </mat-form-field>
