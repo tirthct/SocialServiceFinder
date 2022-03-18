@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   user!: User;
   isUser!: boolean;
   organisation!: Organiser;
+  panelOpenState = false;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
