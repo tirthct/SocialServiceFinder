@@ -20,7 +20,7 @@ public class Organization {
 
 	@Override
 	public String toString() {
-		return "Organization [id=" + id + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
+		return "Organization [name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
 				+ ", address=" + address + ", city=" + city + ", pinCode=" + pinCode + ", organization_type="
 				+ organization_type + "]";
 	}
@@ -32,7 +32,6 @@ public class Organization {
 	public Organization(String name, String email, String phoneNo, String address, String city, String password,
 						long pinCode, OrganizationTypes organization_type) {
 		//TODO: Add check for unique uuid.
-		this.id = UUID.randomUUID().toString();
 		this.name = name;
 		this.email = email;
 		this.phoneNo = phoneNo;
@@ -41,6 +40,12 @@ public class Organization {
 		this.password = password;
 		this.pinCode = pinCode;
 		this.organization_type = organization_type;
+
+		System.out.println("ID of this organization: " + id);
+	}
+
+	public void assign_id(){
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public String getId() {

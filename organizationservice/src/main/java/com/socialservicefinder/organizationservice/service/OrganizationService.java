@@ -2,6 +2,8 @@ package com.socialservicefinder.organizationservice.service;
 
 import java.util.List;
 
+import com.mongodb.MongoWriteException;
+import com.socialservicefinder.organizationservice.exceptions.InvalidOrganizationException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +16,13 @@ import com.socialservicefinder.organizationservice.repository.OrganizationReposi
 public class OrganizationService {
     private final OrganizationRepository organizationRepository;
     private final Codec codec;
+    private final int ASSIGN_ID_TRIES;
 
     @Autowired
     public OrganizationService(OrganizationRepository organizationRepository) throws Exception {
         this.organizationRepository = organizationRepository;
         this.codec = new Codec();
+        this.ASSIGN_ID_TRIES = 3;
     }
 
     public List<Organization> getOrganizations(){
@@ -31,6 +35,23 @@ public class OrganizationService {
             throw new IllegalArgumentException("organization, email, name or password cannot be null or empty");
 
         organization.setPassword(codec.encrypt(organization.getPassword()));
-        organizationRepository.insert(organization);
+        insertOrganization(organization);
+    }
+
+    public void insertOrganization(Organization organization) {
+        // Try assigning ID to organization for TRIES number of times.
+        boolean id_assigned = false;
+        for(int tries = 0; tries < ASSIGN_ID_TRIES; tries++){
+            try{
+                organization.assign_id();
+                organizationRepository.insert(organization);
+                id_assigned = true;
+                break;
+            }
+            catch (MongoWriteException ignored){
+            }
+        }
+        if(!id_assigned)
+            throw new InvalidOrganizationException("Please try after sometime.");
     }
 }
