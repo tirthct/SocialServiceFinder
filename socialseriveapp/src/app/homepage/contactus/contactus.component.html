@@ -1,1 +1,23 @@
-<p>Contact Us</p>
+<mat-card class = "form-container">
+    <mat-card-title>Contact Us</mat-card-title>
+    <form method = "post">
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" placeholder="Eg. johndoe@gmail.com" name="email" id="email"
+                [(ngModel)]="email">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Contact Number</mat-label>
+            <input matInput type="number" placeholder="9999999999" name="contactNo" id="contactNo" [(ngModel)]="contactNumber">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Message</mat-label>
+            <textarea matInput type="text" placeholder="Eg. Type your Message" name="message" id="message" [(ngModel)]="message"></textarea>
+        </mat-form-field><br>
+        <mat-card-actions align = "end">
+            <button mat-button name="contactUsBtn" id="contactUsBtn" (click)="contactUs()">Send</button>
+        </mat-card-actions>
+    </form>
+</mat-card>
