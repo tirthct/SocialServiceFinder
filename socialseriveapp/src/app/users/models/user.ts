@@ -1,5 +1,4 @@
-export interface User{
-    id: number;
+export interface User {
 	name: string;
 	email: string;
 	dob: Date;
@@ -7,5 +6,6 @@ export interface User{
 	address: string;
 	city: string;
 	pinCode: number;
-    preferences: string[];
+	password: string;
+	preferences: string[];
 }

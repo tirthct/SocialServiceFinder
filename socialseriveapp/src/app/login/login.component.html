@@ -1,0 +1,25 @@
+<mat-card class = "form-container">
+    <mat-card-title>Login</mat-card-title>
+    <form method = "post">
+        <mat-radio-group name="userType" [(ngModel)]="userType" required="required">
+            <mat-radio-button *ngFor="let option of options" [value]="option">
+                {{option}}
+            </mat-radio-button>
+        </mat-radio-group><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Email ID</mat-label>
+            <input matInput type="text" placeholder="Eg. johndoe@gmail.com" name="email" id="email"
+                [(ngModel)]="email">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Password" name="password" id="password" [(ngModel)]="password">
+        </mat-form-field><br>
+        <mat-card-actions align = "end">
+            <button mat-button name="loginBtn" id="loginBtn" (click)="login()">Login</button>
+            <button mat-button name="clearBtn" id="clearBtn">Clear</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

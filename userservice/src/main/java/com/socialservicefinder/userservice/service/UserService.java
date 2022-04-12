@@ -3,7 +3,11 @@ package com.socialservicefinder.userservice.service;
 import java.util.List;
 
 import com.mongodb.MongoWriteException;
+import com.socialservicefinder.userservice.dto.Login;
+import com.socialservicefinder.userservice.exceptions.InvalidLoginException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +57,19 @@ public class UserService {
 		if(!id_assigned)
 			throw new InvalidUserException("Please try after sometime.");
 	}
+
+	public User getAuthUser(Login login){
+		if (login == null || login.getEmail() == null || login.getPassword() == null)
+			throw new InvalidLoginException("user or email or password cannot be null or empty");
+
+		login.setPassword(codec.encrypt(login.getPassword()));
+
+		User user = userRepository.findUserByEmail(login.getEmail());
+
+		if(user!=null && login.getPassword().equals(user.getPassword())){
+			return user;
+		}
+		throw new InvalidLoginException("Authentication Failed");
+	}
+
 }

@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import com.socialservicefinder.organizationservice.dto.Organization;
 
 public interface OrganizationRepository extends MongoRepository<Organization, String>{
-
+    public Organization findOrganizationByEmail(String email);
 }

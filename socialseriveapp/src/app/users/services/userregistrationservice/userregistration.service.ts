@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from '../../models/user';
+
 import { environment } from 'src/environments/environment';
+import { User } from '../../models/User';
+
+const httpOptions = {
+  header: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +17,17 @@ import { environment } from 'src/environments/environment';
 
 export class UserregistrationService {
 
-  private apiServerUrl = environment.baseUrl;
-  constructor(private http: HttpClient){ }
+  private apiServerUrlUser = environment.baseUrlUser;
+  private apiServerUrlOrg = environment.baseUrlOrg;
+  constructor(private http: HttpClient) { }
 
-  public getUser(): Observable<User[]>{
-    return this.http.get<User[]>(`${this.apiServerUrl}/user`);
+  public getUser(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiServerUrlUser}/user`);
   }
 
-  public addUser(User: User): Observable<User>{
-    return this.http.post<User>(`${this.apiServerUrl}/addUser`, User);
+  public addUser(User: User): Observable<User> {
+    console.log("Sending User POST");
+    console.log(User);
+    return this.http.post<User>(`${this.apiServerUrlUser}/user`, User);
   }
 }

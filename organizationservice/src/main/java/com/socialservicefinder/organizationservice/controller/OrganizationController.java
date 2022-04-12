@@ -2,6 +2,9 @@ package com.socialservicefinder.organizationservice.controller;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.socialservicefinder.organizationservice.dto.Login;
+import com.socialservicefinder.organizationservice.exceptions.InvalidLoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,19 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Organization> authOrganization(@RequestBody Login login){
+        try{
+            var organization = organizationService.getAuthOrganization(login);
+            return ResponseEntity.status(HttpStatus.OK).body(organization);
+        }
+        catch (InvalidLoginException e){
+            return ResponseEntity.status(HttpStatus .BAD_REQUEST).body(null);
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
     @GetMapping
     public List<Organization> getOrganizations() {
@@ -36,7 +52,8 @@ public class OrganizationController {
     public ResponseEntity<String> addOrganization(@RequestBody Organization organization) {
         try {
             organizationService.addOrganization(organization);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
         }
         catch (InvalidOrganizationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -45,4 +62,6 @@ public class OrganizationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
+
+
 }

@@ -1,15 +1,14 @@
 <mat-toolbar color="primary">
 	<mat-toolbar-row>
-    <a id="homeBtn" routerLink="">
+    <a routerLink="">
       Social Service Finder
     </a>
 		<div class="nav"></div>
 		<nav>
 			<span>
-				<button mat-button>
-					Login </button>
+				<button id="loginBtn" mat-button [routerLink]="['/login']"> Login </button>
 				<button id="registerBtn" mat-button [routerLink]="['/register']"> Register </button>
-				<button id="contactusBtn" mat-button [routerLink]="['/contact']"> Contact us </button>
+				<button id="contactBtn"mat-button [routerLink]="['/contact']"> Contact us </button>
 			</span>
 		</nav>
 	</mat-toolbar-row>

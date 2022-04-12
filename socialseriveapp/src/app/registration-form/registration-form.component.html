@@ -1,4 +1,103 @@
-<form>
-    Registration works!
-</form>
+<mat-card class="form-container">
+    <mat-card-title>User Registration</mat-card-title>
+    <form action="post">
+        <mat-radio-group name="userType" [(ngModel)]="userType" required="required">
+            <mat-radio-button *ngFor="let option of options" [value]="option">
+                {{option}}
+            </mat-radio-button>
+        </mat-radio-group><br>
 
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>First Name</mat-label>
+            <input required="required" matInput type="text" placeholder="Eg. John" name="fName" id="fName"
+                [(ngModel)]="fName">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput type="text" placeholder="Eg. Doe" name="lName" id="lName" [(ngModel)]="lName">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Phone No</mat-label>
+            <input required="required" matInput type="text" placeholder="Eg. 1234567890" name="phNo" id="phNo"
+                [(ngModel)]="phNo">
+            <mat-hint align="start" *ngIf="phNo.length!=10 || !isNumber(phNo)" class="errorHint">Should be 10 digits
+            </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field" id="dobForm">
+            <mat-label>Date of Birth</mat-label>
+            <input required="required" matInput [matDatepicker]="picker" name="dob" id="dob" [(ngModel)]="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-hint align="start" *ngIf="dob>currDate" class="errorHint">Invalid Date</mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Address Line #1</mat-label>
+            <input required="required" matInput type="text" placeholder="Eg. Lombard Street" name="addr" id="addr"
+                [(ngModel)]="addr">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>City</mat-label>
+            <input required="required" matInput type="text" placeholder="Eg. San Francisco" name="city" id="city"
+                [(ngModel)]="city">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>State</mat-label>
+            <input matInput type="text" placeholder="Eg. California" name="state" id="state" [(ngModel)]="state">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Pincode</mat-label>
+            <input required="required" matInput type="text" placeholder="Eg. 12345" name="pincode" id="pincode"
+                [(ngModel)]="pincode">
+            <mat-hint align="start" *ngIf="pincode.length!=5 || !isNumber(pincode)" class="errorHint">Should be 5 digits
+            </mat-hint>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field" id="emailForm">
+            <mat-label>Email</mat-label>
+            <input required="required" matInput type="text" placeholder="Eg. johndoe@gmail.com" name="email" id="email"
+                [(ngModel)]="email">
+            <mat-hint align="start" *ngIf="!emailFormat.test(email)" class="errorHint">Invalid Format</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field" *ngIf="userType == 'User'">
+            <mat-label>Preference</mat-label>
+            <mat-select required="required" multiple name="pref" id="pref" [(ngModel)]="prefs">
+                <mat-option *ngFor="let orgType of orgTypes" [value]="orgType">{{orgType}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field" *ngIf="userType == 'Organiser'">
+            <mat-label>Organisation Type</mat-label>
+            <mat-select required="required" name="orgTypeChosen" id="orgTypeChosen" [(ngModel)]="orgTypeChosen">
+                <mat-option *ngFor="let orgType of orgTypes" [value]="orgType">{{orgType}}</mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Password</mat-label>
+            <input required="required" matInput type="password" placeholder="**********" name="password" id="password"
+                [(ngModel)]="password" maxlength="15" #input>
+            <mat-hint align="end">{{password.length||0}}/15</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Confirm Password</mat-label>
+            <input required="required" matInput type="password" placeholder="**********" name="cPassword" id="cPassword"
+                [(ngModel)]="cPassword">
+            <mat-hint align="start" *ngIf="cPassword!=password" class="errorHint">Passwords do not match</mat-hint>
+            <mat-hint align="end">{{cPassword.length||0}}/15</mat-hint>
+        </mat-form-field><br>
+
+        <mat-card-actions align="end">
+            <button mat-button name="regBtn" id="regBtn" (click)="register()">Register</button>
+            <button mat-button name="clearBtn" id="clearBtn">Clear</button>
+        </mat-card-actions>
+    </form>
+</mat-card>
