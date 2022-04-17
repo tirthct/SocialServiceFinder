@@ -16,22 +16,8 @@ import {
   styleUrls: ['./contactus.component.css']
 })
 export class ContactusComponent implements OnInit {
-  email : string = "";
-  contactNumber : string = ""; 
-  contactUsObject!: ContactUs;
-  message : string = "";
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
-
-  constructor(private loginserviceService: LoginserviceService, 
-    private dashboardService: DashboardService,
-    private router: Router,
-    private _snackBar: MatSnackBar) { }
-
-  contactUs() : void {
-    console.log("Reached here");
-  }
-
+  
+  constructor() { }
   ngOnInit(): void {
   }
 }

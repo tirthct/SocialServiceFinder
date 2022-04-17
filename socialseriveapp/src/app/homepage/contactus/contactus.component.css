@@ -3,29 +3,19 @@
     width: 100%;
 }
 
-.form-container{
-    position: relative;
-    margin: auto;
-    width: 30%;
-    border-radius: 1em;
-    margin-top: 3%;
+#bannerimage {
+    width: 100%;
+    background-image: url(../../../assets/contact_us.jpg);
+    height: 50%;
+    background-position: center;
+  }
+
+
+.section-heading{
+    text-align: center;
+
 }
 
-form{
-    position: relative;
-    margin-top: 5%;
-}
-mat-card-title{
-    position: relative;
-    padding-top: 5%;
-}
-
-mat-radio-button{
-    position: relative;
-    width: 50%;
-}
-
-#dobForm{
-    position: relative;
-    width: 46%;
+.margin-top-sm{
+    margin-top: 2%;
 }
