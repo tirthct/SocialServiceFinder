@@ -17,4 +17,66 @@
     <p *ngIf="!isUser">Organisation Type: {{organisation.organizationType}}</p>
   </mat-expansion-panel>
 </mat-accordion>
-<p *ngIf="!isUser"><button mat-flat-button color="warn">Create Event+</button></p>
+
+  <mat-accordion class = "form-container" *ngIf="!isUser" style="flex: 1 1 auto;">
+    <mat-expansion-panel (opened)="createEventFormPanelOpenState = true"
+                       (closed)="createEventFormPanelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <button mat-flat-button color="warn">Create Event+</button>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click on the button to create an event
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card class = "form-container createEventForm">
+      <mat-card-title>Create Event</mat-card-title>
+      <form method = "post">
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Event Name</mat-label>
+          <input matInput type="text" placeholder="Ex. Tree Plantation Drive..." name="eventName" id="eventName" [(ngModel)]="eventName">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Event Description</mat-label>
+          <textarea matInput placeholder="Ex. Lorem Ipsum..." name="eventDescription" id="eventDescription" [(ngModel)]="eventDescription"></textarea>
+        </mat-form-field><br>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Rewards</mat-label>
+          <input matInput type="number" placeholder="Ex. 10..." name="eventRewards" id="eventRewards" [(ngModel)]="eventRewards">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Location Details</mat-label>
+          <input matInput type="text" placeholder="Ex. Address..." name="eventLocation" id="eventLocation" [(ngModel)]="eventLocation">
+        </mat-form-field>
+        <hr/>
+        <mat-card-subtitle>Point of Contact (POC) Details:</mat-card-subtitle>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" placeholder="Ex. POC Name" name="eventPocName" id="eventPocName" [(ngModel)]="eventPOCName">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Contact</mat-label>
+          <input matInput type="number" placeholder="Ex. POC Contact" name="eventPocContact" id="eventPocContact" [(ngModel)]="eventPOCContact">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Email:</mat-label>
+          <input matInput type="number" placeholder="Ex. POC Email" name="eventPocEmail" id="eventPocEmail" [(ngModel)]="eventPOCEmail">
+        </mat-form-field>
+  
+          <mat-card-actions align = "end">
+              <button mat-button name="createEventBtn" id="createEventBtn" (click)="createEvent()">Create Event</button>
+          </mat-card-actions>
+      </form>
+  </mat-card>
+  </mat-expansion-panel>
+  </mat-accordion>
+
+<hr/>
+
+<div>
+  <p>Search functionality here</p>
+</div>
