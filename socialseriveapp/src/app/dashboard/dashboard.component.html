@@ -1,24 +1,9 @@
-<!-- <mat-card class = "form-container">
-    <mat-card-title><p>{{isUser?user.name:organisation.name}}</p></mat-card-title>
-    <mat-card-content><p>Email: {{isUser?user.email :organisation.email}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content><p>Phone No: {{isUser?user.phoneNo :organisation.phoneNo}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content><p>Date of Birth: {{isUser?user.dob :organisation.dob}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content><p>Address: {{isUser?user.address :organisation.address}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content *ngIf="isUser"><p>Preference: {{user.preferences}}</p></mat-card-content><br>
-    <mat-divider inset *ngIf="isUser"></mat-divider>
-    <mat-card-content *ngIf="!isUser"><p>Organisation Type: {{organisation.organizationType}}</p></mat-card-content><br>
-    <mat-divider inset *ngIf="!isUser"></mat-divider>
-</mat-card> -->
 <mat-accordion class = "form-container">
     <mat-expansion-panel (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        User
+        {{isUser?"User":"Organization"}}
       </mat-panel-title>
       <mat-panel-description>
         {{isUser?user.name:organisation.name}}
@@ -26,9 +11,10 @@
     </mat-expansion-panel-header>
     <p>Email: {{isUser?user.email :organisation.email}}</p>
     <p>Phone No: {{isUser?user.phoneNo :organisation.phoneNo}}</p>
-    <p>Date of Birth: {{isUser?user.dob :organisation.dob}}</p>
+    <p *ngIf="isUser">Date of Birth: {{isUser?user.dob :organisation.dob}}</p>
     <p>Address: {{isUser?user.address :organisation.address}}</p>
     <p *ngIf="isUser">Preference: {{user.preferences}}</p>
     <p *ngIf="!isUser">Organisation Type: {{organisation.organizationType}}</p>
   </mat-expansion-panel>
 </mat-accordion>
+<p *ngIf="!isUser"><button mat-flat-button color="warn">Create Event+</button></p>
