@@ -48,8 +48,16 @@
         </mat-form-field>
   
         <mat-form-field appearance="outline" class="form-input-field">
-          <mat-label>Location Details</mat-label>
+          <mat-label>Address</mat-label>
           <input matInput type="text" placeholder="Ex. Address..." name="eventLocation" id="eventLocation" [(ngModel)]="eventLocation">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>City</mat-label>
+          <input matInput type="text" placeholder="Ex. City..." name="eventCity" id="eventCity" [(ngModel)]="eventCity">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Zip Code</mat-label>
+          <input matInput type="number" placeholder="Ex. 12345..." name="eventZip" id="eventZip" [(ngModel)]="eventZip">
         </mat-form-field>
         <hr/>
         <mat-card-subtitle>Point of Contact (POC) Details:</mat-card-subtitle>
@@ -64,7 +72,7 @@
   
         <mat-form-field appearance="outline" class="form-input-field">
           <mat-label>Email:</mat-label>
-          <input matInput type="number" placeholder="Ex. POC Email" name="eventPocEmail" id="eventPocEmail" [(ngModel)]="eventPOCEmail">
+          <input matInput type="text" placeholder="Ex. POC Email" name="eventPocEmail" id="eventPocEmail" [(ngModel)]="eventPOCEmail">
         </mat-form-field>
   
           <mat-card-actions align = "end">

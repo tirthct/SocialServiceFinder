@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateEvent } from '../users/models/CreateEvent';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { Event } from '../users/models/Event';
 import { Organiser } from '../users/models/Organiser';
 import { User } from '../users/models/User';
 import { DashboardService } from '../users/services/dashboardservice/dashboard.service';
@@ -14,7 +19,7 @@ export class DashboardComponent implements OnInit {
   isUser!: boolean;
   organisation!: Organiser;
   panelOpenState = false;
-  createEventObject!: CreateEvent;
+  createEventObject!: Event;
   createEventFormPanelOpenState = false;
   eventName: string="";
   eventDescription: string="";
@@ -23,7 +28,11 @@ export class DashboardComponent implements OnInit {
   eventPOCName: string="";
   eventPOCContact: string="";
   eventPOCEmail: string="";
-  constructor(private dashboardService: DashboardService) { }
+  eventCity: string="";
+  eventZip: string="";
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.isUser = this.dashboardService.isUser;
@@ -35,18 +44,31 @@ export class DashboardComponent implements OnInit {
 
   createEvent(): void{
     this.createEventObject ={
-      eventName: this.eventName,
-      eventDescription: this.eventDescription,
-      eventRewards: Number(this.eventRewards),
-      eventLocation: this.eventLocation,
-      eventPOCName: this.eventPOCName,
-      eventPOCContact: Number(this.eventPOCContact),
-      eventPOCEmail: this.eventPOCEmail
+      name: this.eventName,
+      description: this.eventDescription,
+      rewards: Number(this.eventRewards),
+      address: this.eventLocation,
+      POCName: this.eventPOCName,
+      phoneNo: Number(this.eventPOCContact),
+      email: this.eventPOCEmail,
+      city: this.eventCity,
+      pinCode: Number(this.eventZip)
     }
-
-    console.log(this.createEventObject);
-
-
-    //TO DO: call the backend service using this object
+    
+    this.dashboardService.createEvent(this.createEventObject).subscribe((res)=>{
+      this._snackBar.open('Event Created!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    },
+    (err)=>{
+      this._snackBar.open('Failure: In Event Creation!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    }
+    )
   }
 }

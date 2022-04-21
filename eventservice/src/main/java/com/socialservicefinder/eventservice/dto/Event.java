@@ -16,10 +16,12 @@ public class Event {
     private String city;
     private long rewards;
     private long pinCode;
+    private String email;
+    private String POCName;
 
     @Override
     public String toString() {
-        return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo
+        return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo + ", email="+email+", POCName"+ POCName
                 + ", address=" + address + ", city=" + city + ", rewards=" + rewards + ", pinCode="
                 + pinCode + "]";
     }
@@ -28,7 +30,7 @@ public class Event {
         super();
     }
 
-    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode) {
+    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String POCName) {
         this.name = name;
         this.description = description;
         this.phoneNo = phoneNo;
@@ -36,6 +38,24 @@ public class Event {
         this.city = city;
         this.rewards = rewards;
         this.pinCode = pinCode;
+        this.email = email;
+        this.POCName = POCName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPOCName() {
+        return POCName;
+    }
+
+    public void setPOCName(String POCName) {
+        this.POCName = POCName;
     }
 
     public void assign_id() {
