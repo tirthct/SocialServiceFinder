@@ -28,7 +28,7 @@ public class EventService {
 
     public void addEvent(Event e) {
         if (e == null || e.getName() == null || e.getAddress() == null || e.getDescription() == null) {
-            throw new IllegalArgumentException("name, address or description cannot be null or empty");
+            throw new InvalidEventException("name, address or description cannot be null or empty");
         }
         insertEvent(e);
     }
