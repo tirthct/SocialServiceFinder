@@ -26,7 +26,7 @@
             </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-input-field" id="dobForm">
+        <mat-form-field appearance="outline" class="form-input-field" id="dobForm" *ngIf="userType == 'User'">
             <mat-label>Date of Birth</mat-label>
             <input required="required" matInput [matDatepicker]="picker" name="dob" id="dob" [(ngModel)]="dob">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
