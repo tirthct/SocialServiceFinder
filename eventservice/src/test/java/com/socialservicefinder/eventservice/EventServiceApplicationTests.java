@@ -25,16 +25,23 @@ class EventServiceApplicationTests {
     @BeforeEach
     public void init() {
         _events = List.of(
-                new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612),
-                new Event("Covid Campaign - I", "Campaign I to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 50000, 92612),
-                new Event("Covid Campaign - II", "Campaign II to raise covid awareness", "9499926609", "3901 Parkview Ln, Apt 8A", "Irvine", 5000, 92613),
-                new Event("Covid Campaign - III", "Campaign III to raise covid awareness", "9499926610", "3901 Parkview Ln, Apt 8A", "Irvine", 45000, 92614));
+                new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612, "abc@gmail.com", "Covid"),
+                new Event("Covid Campaign - I", "Campaign I to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 50000, 92612, "abc@gmail.com", "Covid"),
+                new Event("Covid Campaign - II", "Campaign II to raise covid awareness", "9499926609", "3901 Parkview Ln, Apt 8A", "Irvine", 5000, 92613, "abc@gmail.com", "Covid"),
+                new Event("Covid Campaign - III", "Campaign III to raise covid awareness", "9499926610", "3901 Parkview Ln, Apt 8A", "Irvine", 45000, 92614, "abc@gmail.com", "Covid"));
     }
 
     @Test
-    public void getUsers() {
+    public void getEvents() {
         Mockito.when(eventService.getEvents()).thenReturn(_events);
         List<Event> events = eventService.getEvents();
+        Assertions.assertEquals(events, _events);
+    }
+
+    @Test
+    public void getMatchingEvents() {
+        Mockito.when(eventService.getMatchingEvents(Mockito.anyString())).thenReturn(_events);
+        List<Event> events = eventService.getMatchingEvents("Covid");
         Assertions.assertEquals(events, _events);
     }
 }

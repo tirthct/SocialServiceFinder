@@ -1,6 +1,7 @@
 package com.socialservicefinder.eventservice.controller;
 
 import com.socialservicefinder.eventservice.dto.Event;
+import com.socialservicefinder.eventservice.dto.SearchQuery;
 import com.socialservicefinder.eventservice.exceptions.InvalidEventException;
 import com.socialservicefinder.eventservice.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -36,5 +38,17 @@ public class EventController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    
+
+    @GetMapping
+    @RequestMapping("/search/")
+    public List<Event> getMatchingEvents(@RequestBody SearchQuery q) {
+        try {
+            List<Event> events = eventService.getMatchingEvents(q.getQuery());
+            System.out.println(q.getQuery());
+            return events;
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
+    }
+
 }
