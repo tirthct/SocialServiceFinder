@@ -15,6 +15,7 @@ import { DashboardService } from '../users/services/dashboardservice/dashboard.s
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
   user!: User;
   isUser!: boolean;
@@ -32,9 +33,13 @@ export class DashboardComponent implements OnInit {
   eventCity: string="";
   eventZip: string="";
   searchEventsQuery: string="";
-  searchQueryObject!:SearchQuery; 
+  eventResult: string="";
+  searchQueryObject!:SearchQuery;
+  startDate!: Date;
+  endDate!: Date;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  events!: Event;
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -55,8 +60,12 @@ export class DashboardComponent implements OnInit {
       phoneNo: Number(this.eventPOCContact),
       email: this.eventPOCEmail,
       city: this.eventCity,
-      pinCode: Number(this.eventZip)
+      pinCode: Number(this.eventZip),
+      startDate: this.startDate,
+      endDate: this.endDate
     }
+
+    console.log(this.createEventObject);
     
     this.dashboardService.createEvent(this.createEventObject).subscribe((res)=>{
       this._snackBar.open('Event Created!!', "",{
@@ -80,8 +89,18 @@ export class DashboardComponent implements OnInit {
       query: this.searchEventsQuery
     }
     console.log(this.searchQueryObject);
-    this.searchEventsQuery="";
-    // TO DO send to backend
+    this.dashboardService.searchEvents(this.searchQueryObject).subscribe((res)=>{
+      this.eventResult=JSON.stringify(res);
+      console.log(res);
+      this.searchEventsQuery="";
+    },(err)=>{
+      this.searchEventsQuery="";
+      this._snackBar.open('Search Fetch Failed!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    });
   }
 
   isNumber(contact: any): boolean {

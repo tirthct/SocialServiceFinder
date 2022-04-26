@@ -59,6 +59,21 @@
           <mat-label>Zip Code</mat-label>
           <input matInput type="number" placeholder="Ex. 12345..." name="eventZip" id="eventZip" [(ngModel)]="eventZip">
         </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Start Date</mat-label>
+          <input required="required" matInput [matDatepicker]="startDatePicker" name="startDate" id="startDate" [(ngModel)]="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <!-- <mat-hint align="start" *ngIf="dob>currDate" class="errorHint">Invalid Date</mat-hint> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-input-field">
+        <mat-label>End Date</mat-label>
+        <input required="required" matInput [matDatepicker]="endDatePicker" name="endDate" id="endDate" [(ngModel)]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-hint align="start" *ngIf="startDate>endDate" class="errorHint">Invalid Date</mat-hint>
+      </mat-form-field>
+
         <hr/>
         <mat-card-subtitle>Point of Contact (POC) Details:</mat-card-subtitle>
         <mat-form-field appearance="outline" class="form-input-field">
@@ -106,3 +121,19 @@
     <button class="searchButton" name="searchEventsButton" id="searchEventsButton" (click)="searchEvents()">Search</button>
   </form>
 </div>
+
+
+<div>
+  {{eventResult}}
+</div>
+
+<!-- <div class="col-lg-6" style="float:none;margin:auto;">
+  <mat-card *ngFor="let event of events">
+    <mat-card-title>
+      {{event.name}}
+    </mat-card-title>
+    <mat-card-content>
+      {{event.description}}
+    </mat-card-content>
+  </mat-card>
+</div> -->

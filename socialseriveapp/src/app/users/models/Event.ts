@@ -8,4 +8,6 @@ export interface Event{
     email: string;
     city: string;
     pinCode: number;
+    startDate: Date;
+    endDate: Date;
 }

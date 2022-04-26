@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Event } from '../../models/Event';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { SearchQuery } from '../../models/SearchQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -36,11 +37,12 @@ export class DashboardService {
   }
 
   public createEvent(Event: Event): Observable<Event>{
-    console.log("Sending User POST");
     var url=`${this.apiServerUrlUser}/event`;
-    console.log(url);
-    console.log("Sending the following object");
-    console.log(Event);
     return this.http.post<Event>(url, Event);
+  }
+
+  public searchEvents(SearchQuery: SearchQuery): Observable<SearchQuery>{
+    var url=`${this.apiServerUrlUser}/event/search/`;
+    return this.http.post<SearchQuery>(url, SearchQuery);
   }
 }
