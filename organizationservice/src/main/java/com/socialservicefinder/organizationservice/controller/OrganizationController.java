@@ -29,15 +29,13 @@ public class OrganizationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Organization> authOrganization(@RequestBody Login login){
-        try{
+    public ResponseEntity<Organization> authOrganization(@RequestBody Login login) {
+        try {
             var organization = organizationService.getAuthOrganization(login);
             return ResponseEntity.status(HttpStatus.OK).body(organization);
-        }
-        catch (InvalidLoginException e){
+        } catch (InvalidLoginException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -54,11 +52,9 @@ public class OrganizationController {
             organizationService.addOrganization(organization);
             ObjectMapper mapper = new ObjectMapper();
             return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
-        }
-        catch (InvalidOrganizationException e) {
+        } catch (InvalidOrganizationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

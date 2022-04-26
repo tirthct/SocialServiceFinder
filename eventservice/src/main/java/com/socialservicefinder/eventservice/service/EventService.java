@@ -26,6 +26,10 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> getMatchingEvents(String name) {
+        return eventRepository.findEventByNameContains(name);
+    }
+
     public void addEvent(Event e) {
         if (e == null || e.getName() == null || e.getAddress() == null || e.getDescription() == null) {
             throw new InvalidEventException("name, address or description cannot be null or empty");

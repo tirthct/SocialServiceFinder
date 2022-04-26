@@ -26,7 +26,7 @@ public class EventServiceApplicationIntegrationTests {
 
     @Test
     public void post_endpoint_should_return_ok() throws Exception {
-        Event event = new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612);
+        Event event = new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612, "abc@gmail.com", "Covid");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(event);
         this.mockMvc.perform(
@@ -36,7 +36,7 @@ public class EventServiceApplicationIntegrationTests {
 
     @Test
     public void post_endpoint_null_name_should_return_badRequest() throws Exception {
-        Event event = new Event(null, "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612);
+        Event event = new Event(null, "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612, "abc@gmail.com", "Covid");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(event);
         this.mockMvc.perform(
@@ -46,7 +46,7 @@ public class EventServiceApplicationIntegrationTests {
 
     @Test
     public void post_endpoint_null_description_should_return_badRequest() throws Exception {
-        Event event = new Event("Covid Campaign", null, "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612);
+        Event event = new Event("Covid Campaign", null, "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612, "abc@gmail.com", "Covid");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(event);
         this.mockMvc.perform(
@@ -56,7 +56,7 @@ public class EventServiceApplicationIntegrationTests {
 
     @Test
     public void post_endpoint_null_address_should_return_badRequest() throws Exception {
-        Event event = new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", null, "Irvine", 10000, 92612);
+        Event event = new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", null, "Irvine", 10000, 92612, "abc@gmail.com", "Covid");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(event);
         this.mockMvc.perform(
