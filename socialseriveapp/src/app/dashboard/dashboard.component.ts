@@ -6,6 +6,7 @@ import {
 } from '@angular/material/snack-bar';
 import { Event } from '../users/models/Event';
 import { Organiser } from '../users/models/Organiser';
+import { SearchQuery } from '../users/models/SearchQuery';
 import { User } from '../users/models/User';
 import { DashboardService } from '../users/services/dashboardservice/dashboard.service';
 
@@ -30,6 +31,8 @@ export class DashboardComponent implements OnInit {
   eventPOCEmail: string="";
   eventCity: string="";
   eventZip: string="";
+  searchEventsQuery: string="";
+  searchQueryObject!:SearchQuery; 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
@@ -70,5 +73,18 @@ export class DashboardComponent implements OnInit {
       });
     }
     )
+  }
+
+  searchEvents(): void{
+    this.searchQueryObject={
+      query: this.searchEventsQuery
+    }
+    console.log(this.searchQueryObject);
+    this.searchEventsQuery="";
+    // TO DO send to backend
+  }
+
+  isNumber(contact: any): boolean {
+    return !isNaN(contact);
   }
 }
