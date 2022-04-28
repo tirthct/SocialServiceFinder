@@ -19,8 +19,9 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   public setUser(user :User){
-    this.user = user;
-    this.isUser = true;
+    this.user = JSON.parse(localStorage.getItem('userDetails') || '{}');
+    this.isUser = JSON.parse(localStorage.getItem('status') || '{}');
+    console.log(this.user);
   }
 
   public setOrgniser(organiser :Organiser){

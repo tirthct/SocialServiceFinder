@@ -43,11 +43,11 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.isUser = this.dashboardService.isUser;
+    this.isUser = JSON.parse(localStorage.getItem('status') || '{}');
     if(this.isUser)
-      this.user = this.dashboardService.getUser();
+    this.user = JSON.parse(localStorage.getItem('userDetails') || '{}');
     else
-      this.organisation = this.dashboardService.getOrganiser();
+    this.organisation = JSON.parse(localStorage.getItem('orgDetails') || '{}');
   }
 
   createEvent(): void{
