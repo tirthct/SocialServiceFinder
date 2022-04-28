@@ -43,6 +43,9 @@ public class EventController {
     @RequestMapping("/search/")
     public List<Event> getMatchingEvents(@RequestBody SearchQuery q) {
         try {
+            if (q.getQuery().isEmpty()) {
+                return Collections.emptyList();
+            }
             List<Event> events = eventService.getMatchingEvents(q.getQuery());
             System.out.println(q.getQuery());
             return events;
