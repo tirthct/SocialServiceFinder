@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserregistrationService } from '../userregistrationservice/userregistration.service';
-import { User } from '../../models/user';
+import { User } from '../../models/User';
 import { Organiser } from '../../models/Organiser';
 import { Observable } from 'rxjs';
 import { Event } from '../../models/Event';

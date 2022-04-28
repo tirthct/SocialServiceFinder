@@ -7,7 +7,7 @@ import {
 import { Event } from '../users/models/Event';
 import { Organiser } from '../users/models/Organiser';
 import { SearchQuery } from '../users/models/SearchQuery';
-import { User } from '../users/models/user';
+import { User } from '../users/models/User';
 import { DashboardService } from '../users/services/dashboardservice/dashboard.service';
 
 @Component({
