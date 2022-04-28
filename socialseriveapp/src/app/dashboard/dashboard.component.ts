@@ -7,7 +7,7 @@ import {
 import { Event } from '../users/models/Event';
 import { Organiser } from '../users/models/Organiser';
 import { SearchQuery } from '../users/models/SearchQuery';
-import { User } from '../users/models/User';
+import { User } from '../users/models/user';
 import { DashboardService } from '../users/services/dashboardservice/dashboard.service';
 
 @Component({
@@ -43,11 +43,11 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.isUser = this.dashboardService.isUser;
+    this.isUser = JSON.parse(localStorage.getItem('status') || '{}');
     if(this.isUser)
-      this.user = this.dashboardService.getUser();
+    this.user = JSON.parse(localStorage.getItem('userDetails') || '{}');
     else
-      this.organisation = this.dashboardService.getOrganiser();
+    this.organisation = JSON.parse(localStorage.getItem('orgDetails') || '{}');
   }
 
   createEvent(): void{
