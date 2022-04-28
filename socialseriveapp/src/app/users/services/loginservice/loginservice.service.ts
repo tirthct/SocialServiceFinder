@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Organiser } from '../../models/Organiser';
-import { User } from '../../models/User';
+import { User } from '../../models/user';
 
 const httpOptions = {
   header: new HttpHeaders({

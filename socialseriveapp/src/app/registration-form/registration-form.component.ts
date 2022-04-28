@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../users/models/User';
+import { User } from '../users/models/user';
 import { Organiser } from '../users/models/Organiser';
 import { Router } from '@angular/router';
 
@@ -80,7 +80,7 @@ export class RegistrationFormComponent implements OnInit {
     }
     else if (this.userType == "Organiser") {
       this.organiser = {
-        name: `${this.fName} ${this.lName}`,
+        name: this.fName,
         email: this.email,
         dob: this.dob,
         phoneNo: this.phNo,
