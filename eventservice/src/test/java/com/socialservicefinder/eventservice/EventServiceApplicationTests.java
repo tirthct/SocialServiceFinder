@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @ActiveProfiles("test")
@@ -24,11 +25,13 @@ class EventServiceApplicationTests {
 
     @BeforeEach
     public void init() {
+        Date startDate = new Date(System.currentTimeMillis() - 10000);
+        Date endDate = new Date(System.currentTimeMillis());
         _events = List.of(
-                new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612, "abc@gmail.com", "Covid"),
-                new Event("Covid Campaign - I", "Campaign I to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 50000, 92612, "abc@gmail.com", "Covid"),
-                new Event("Covid Campaign - II", "Campaign II to raise covid awareness", "9499926609", "3901 Parkview Ln, Apt 8A", "Irvine", 5000, 92613, "abc@gmail.com", "Covid"),
-                new Event("Covid Campaign - III", "Campaign III to raise covid awareness", "9499926610", "3901 Parkview Ln, Apt 8A", "Irvine", 45000, 92614, "abc@gmail.com", "Covid"));
+                new Event("Covid Campaign", "Campaign to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 10000, 92612, "abc@gmail.com", "Covid", startDate, endDate),
+                new Event("Covid Campaign - I", "Campaign I to raise covid awareness", "9499926608", "3901 Parkview Ln, Apt 8A", "Irvine", 50000, 92612, "abc@gmail.com", "Covid", startDate, endDate),
+                new Event("Covid Campaign - II", "Campaign II to raise covid awareness", "9499926609", "3901 Parkview Ln, Apt 8A", "Irvine", 5000, 92613, "abc@gmail.com", "Covid", startDate, endDate),
+                new Event("Covid Campaign - III", "Campaign III to raise covid awareness", "9499926610", "3901 Parkview Ln, Apt 8A", "Irvine", 45000, 92614, "abc@gmail.com", "Covid", startDate, endDate));
     }
 
     @Test

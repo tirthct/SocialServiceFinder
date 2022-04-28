@@ -3,6 +3,7 @@ package com.socialservicefinder.eventservice.dto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Document("events")
@@ -18,19 +19,21 @@ public class Event {
     private long pinCode;
     private String email;
     private String POCName;
+    private Date startDate;
+    private Date endDate;
 
     @Override
     public String toString() {
-        return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo + ", email="+email+", POCName"+ POCName
+        return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo + ", email=" + email + ", POCName" + POCName
                 + ", address=" + address + ", city=" + city + ", rewards=" + rewards + ", pinCode="
-                + pinCode + "]";
+                + pinCode + ", startDate=" + startDate.toString() + ", endDate=" + endDate.toString() + "]";
     }
 
     public Event() {
         super();
     }
 
-    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String POCName) {
+    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String POCName, Date startDate, Date endDate) {
         this.name = name;
         this.description = description;
         this.phoneNo = phoneNo;
@@ -40,6 +43,8 @@ public class Event {
         this.pinCode = pinCode;
         this.email = email;
         this.POCName = POCName;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public String getEmail() {
@@ -124,5 +129,21 @@ public class Event {
 
     public void setPinCode(long pinCode) {
         this.pinCode = pinCode;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
