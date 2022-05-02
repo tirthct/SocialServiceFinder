@@ -21,6 +21,7 @@ export class DashboardService {
   public setUser(user :User){
     this.user = JSON.parse(localStorage.getItem('userDetails') || '{}');
     this.isUser = JSON.parse(localStorage.getItem('status') || '{}');
+    localStorage.setItem("loginStatus", "1");
     console.log(this.user);
   }
 
