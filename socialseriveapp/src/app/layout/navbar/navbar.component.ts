@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../users/models/User';
-import { Organiser } from '../../users/models/Organiser';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   loginStatus: string="";
-  isUser!: boolean;
-  user!: User; 
   
   constructor() { }
 
@@ -22,7 +17,6 @@ export class NavbarComponent implements OnInit {
   logout(): void{
     this.loginStatus="";
     localStorage.clear();
-    console.log("Bye..");
   }
 
 }
