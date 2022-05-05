@@ -33,10 +33,11 @@ export class DashboardComponent implements OnInit {
   eventCity: string="";
   eventZip: string="";
   searchEventsQuery: string="";
-  eventResult: string="";
+  eventResult! : any[];
   searchQueryObject!:SearchQuery;
   startDate!: Date;
   endDate!: Date;
+  eventReturn: string="";
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   events!: Event;
@@ -84,13 +85,16 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+
   searchEvents(): void{
     this.searchQueryObject={
       query: this.searchEventsQuery
     }
+
     console.log(this.searchQueryObject);
     this.dashboardService.searchEvents(this.searchQueryObject).subscribe((res)=>{
-      this.eventResult=JSON.stringify(res);
+      this.eventReturn = JSON.stringify(res);
+      this.eventResult=JSON.parse(this.eventReturn);
       console.log(res);
       this.searchEventsQuery="";
     },(err)=>{

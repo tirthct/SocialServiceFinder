@@ -124,16 +124,17 @@
 
 
 <div>
-  {{eventResult}}
-</div>
-
-<!-- <div class="col-lg-6" style="float:none;margin:auto;">
-  <mat-card *ngFor="let event of events">
+  <mat-card class = "search-Results" *ngFor="let event of eventResult">
     <mat-card-title>
-      {{event.name}}
+      <p style="color:green; text-decoration: underline;">{{event.name}}</p>
     </mat-card-title>
     <mat-card-content>
-      {{event.description}}
+      <p style="color:gray; padding-top: 1px; padding-bottom: 1px;"> Start Date: {{event.startDate}}
+      <br>Contact: {{event.phoneNo}}
+      <br>Email: {{event.email}}
+      <br>Address: {{event.address}}, {{event.city}} , {{event.pinCode}}</p>
+      <h3>About: {{event.description}}</h3>
     </mat-card-content>
   </mat-card>
-</div> -->
+</div>
+
