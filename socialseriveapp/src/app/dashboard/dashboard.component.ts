@@ -74,6 +74,7 @@ export class DashboardComponent implements OnInit {
         verticalPosition: this.verticalPosition,
         duration: 2000,
       });
+      this.clearForm();
     },
     (err)=>{
       this._snackBar.open('Failure: In Event Creation!!', "",{
@@ -105,6 +106,18 @@ export class DashboardComponent implements OnInit {
         duration: 2000,
       });
     });
+  }
+
+  clearForm(): void{
+    this.eventName="";
+    this.eventDescription="";
+    this.eventRewards="";
+    this.eventLocation="";
+    this.eventPOCName="";
+    this.eventPOCContact="";
+    this.eventPOCEmail="";
+    this.eventCity="";
+    this.eventZip="";
   }
 
   isNumber(contact: any): boolean {
