@@ -28,7 +28,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @PostMapping("/login")
     public ResponseEntity<User> authUser(@RequestBody Login login) {
         try {

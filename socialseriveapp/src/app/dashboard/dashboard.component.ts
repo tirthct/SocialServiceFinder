@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   events!: Event;
-  organizationId: string="";
+  id: string="";
   fetchMyEventsObject!:FetchMyEvents;
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
@@ -50,9 +50,12 @@ export class DashboardComponent implements OnInit {
     this.isUser = JSON.parse(localStorage.getItem('status') || '{}');
     if(this.isUser){
       this.user = JSON.parse(localStorage.getItem('userDetails') || '{}');
+      console.log(this.user);
+      this.id=JSON.parse(localStorage.getItem('userDetails') || '{}').id;
+      console.log(this.user);
     }else{
       this.organisation = JSON.parse(localStorage.getItem('orgDetails') || '{}');
-      this.organizationId=JSON.parse(localStorage.getItem('orgDetails') || '{}').id;
+      this.id=JSON.parse(localStorage.getItem('orgDetails') || '{}').id;
     }
   }
 
@@ -69,7 +72,7 @@ export class DashboardComponent implements OnInit {
       pinCode: Number(this.eventZip),
       startDate: this.startDate,
       endDate: this.endDate,
-      organizationId: this.organizationId
+      organizationId: this.id
     }
 
     console.log(this.createEventObject);
@@ -102,7 +105,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.searchEvents(this.searchQueryObject).subscribe((res)=>{
       this.eventReturn = JSON.stringify(res);
       this.eventResult=JSON.parse(this.eventReturn);
-      console.log(res);
       this.searchEventsQuery="";
     },(err)=>{
       this.searchEventsQuery="";
@@ -128,8 +130,18 @@ export class DashboardComponent implements OnInit {
 
   fetchMyEvents(): void{
     this.fetchMyEventsObject={
-      id: this.organizationId
+      id: this.id,
+      isOrganizer: !this.isUser
     }
+    this.dashboardService.fetchMyEvents(this.fetchMyEventsObject).subscribe((res)=>{
+      console.log(res);
+    }, (err)=>{
+      this._snackBar.open('My Events Fetch Failed!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    });
     console.log(this.fetchMyEventsObject);
   }
 
