@@ -5,7 +5,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Event } from '../users/models/Event';
-import { FetchMyEvents } from '../users/models/FetchMyEvents';
+import {FetchMyEvents} from '../users/models/FetchMyEvents'
 import { Organiser } from '../users/models/Organiser';
 import { SearchQuery } from '../users/models/SearchQuery';
 import { User } from '../users/models/User';
