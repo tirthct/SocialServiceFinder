@@ -2,7 +2,6 @@ package com.socialservicefinder.eventservice.dto;
 
 public class FetchMyEvents {
     private String id;
-
     private boolean isOrganizer;
 
     public String getId() {
@@ -13,7 +12,7 @@ public class FetchMyEvents {
         this.id = id;
     }
 
-    public boolean isOrganizer() {
+    public boolean getIsOrganizer() {
         return isOrganizer;
     }
 
