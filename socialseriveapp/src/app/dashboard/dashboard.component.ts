@@ -95,6 +95,10 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  getEventData(event: any): void{
+    localStorage.setItem("currEvent", JSON.stringify(event));
+  }
+
 
   searchEvents(): void{
     this.searchQueryObject={

@@ -1,0 +1,46 @@
+.title{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: green;
+    text-align: left;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    padding-top: 15px;
+    text-decoration: underline
+}
+
+.search-Results{
+    position: relative;
+    margin: auto;
+    width: 75%;
+    border-radius: 1em;
+    margin-top: 1%;
+}
+
+.details{
+    font-family: "Raleway", sans-serif;
+    font-weight: 30;
+    font-size: 18px;
+    color: grey;
+    text-align: left;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.description{
+    font-family: "Raleway", sans-serif;
+    font-weight: 30;
+    font-size: 15px;
+    color: #080808;
+    text-align: left;
+}
+
+.btn{
+   padding-bottom: 50px;
+   padding-top: 50px; 
+}
+
