@@ -25,7 +25,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [name=" + name + ", email=" + email + ", dob=" + dob + ", phoneNo=" + phoneNo + ", address="
-				+ address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + "]";
+				+ address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + ", id="+ id + "]";
 	}
 
 	public User() {
@@ -48,6 +48,15 @@ public class User {
 	public void assign_id(){
 		this.id = UUID.randomUUID().toString();
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 
 	public String getName() {
 		return name;
