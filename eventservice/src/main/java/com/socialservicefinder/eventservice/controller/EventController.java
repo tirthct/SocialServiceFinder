@@ -2,6 +2,7 @@ package com.socialservicefinder.eventservice.controller;
 
 import com.socialservicefinder.eventservice.dto.Event;
 import com.socialservicefinder.eventservice.dto.EventLookUp;
+import com.socialservicefinder.eventservice.dto.FetchMyEvents;
 import com.socialservicefinder.eventservice.dto.SearchQuery;
 import com.socialservicefinder.eventservice.exceptions.InvalidEventException;
 import com.socialservicefinder.eventservice.service.EventLookUpService;
@@ -64,6 +65,21 @@ public class EventController {
             System.out.println("Query String:" + q.getQuery());
             return events;
         } catch (Exception e) {
+            return Collections.emptyList();
+        }
+    }
+
+    @GetMapping
+    @RequestMapping("/fetchMyEvents/")
+    public List<Event> fetchMyEvents(@RequestBody FetchMyEvents f){
+        try{
+            if(f.getId().length()==0){
+                return Collections.emptyList();
+            }
+            //TO DO
+            
+            return null;
+        }catch (Exception e){
             return Collections.emptyList();
         }
     }

@@ -21,6 +21,7 @@ public class Event {
     private String POCName;
     private Date startDate;
     private Date endDate;
+    private String organizationId;
 
     @Override
     public String toString() {
@@ -145,5 +146,13 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(String organizationId) {
+        this.organizationId = organizationId;
     }
 }

@@ -10,4 +10,5 @@ export interface Event{
     pinCode: number;
     startDate: Date;
     endDate: Date;
+    organizationId: string;
 }
