@@ -69,7 +69,6 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl("/dashboard").then(() => {
           window.location.reload();
         });
-
       },
       (err)=>{
         this._snackBar.open('Login Failed!!', "",{
