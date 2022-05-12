@@ -105,7 +105,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.searchEvents(this.searchQueryObject).subscribe((res)=>{
       this.eventReturn = JSON.stringify(res);
       this.eventResult=JSON.parse(this.eventReturn);
-      console.log(res);
       this.searchEventsQuery="";
     },(err)=>{
       this.searchEventsQuery="";
@@ -134,6 +133,15 @@ export class DashboardComponent implements OnInit {
       id: this.id,
       isOrganizer: !this.isUser
     }
+    this.dashboardService.fetchMyEvents(this.fetchMyEventsObject).subscribe((res)=>{
+      console.log(res);
+    }, (err)=>{
+      this._snackBar.open('My Events Fetch Failed!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    });
     console.log(this.fetchMyEventsObject);
   }
 

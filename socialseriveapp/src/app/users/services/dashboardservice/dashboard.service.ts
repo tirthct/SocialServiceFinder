@@ -7,6 +7,7 @@ import { Event } from '../../models/Event';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { SearchQuery } from '../../models/SearchQuery';
+import { FetchMyEvents } from '../../models/FetchMyEvents';
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,10 @@ export class DashboardService {
     var url=`${this.apiServerUrlUser}/event/search/`;
     return this.http.post<SearchQuery>(url, SearchQuery);
   }
+
+  public fetchMyEvents(FetchMyEvents: FetchMyEvents): Observable<FetchMyEvents>{
+    var url=`${this.apiServerUrlUser}/event/fetchMyEvents/`;
+    return this.http.post<FetchMyEvents>(url, FetchMyEvents);
+  }
+
 }
