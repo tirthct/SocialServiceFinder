@@ -89,7 +89,7 @@ public class EventController {
             if (f.getId().length() == 0) {
                 return Collections.emptyList();
             }
-            return eventService.fetchMyEvents(f.getId(), f.isOrganizer());
+            return eventService.fetchMyEvents(f.getId(), f.getIsOrganizer());
         } catch (Exception e) {
             return Collections.emptyList();
         }

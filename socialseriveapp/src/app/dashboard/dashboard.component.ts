@@ -142,7 +142,6 @@ export class DashboardComponent implements OnInit {
         duration: 2000,
       });
     });
-    console.log(this.fetchMyEventsObject);
   }
 
   isNumber(contact: any): boolean {
