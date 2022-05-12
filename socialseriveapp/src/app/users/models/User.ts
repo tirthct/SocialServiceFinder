@@ -8,4 +8,5 @@ export interface User {
 	pinCode: number;
 	password: string;
 	preferences: string[];
+	rewards: number;
 }

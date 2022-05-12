@@ -20,6 +20,7 @@ public class User {
 	private String password;
 	private long pinCode;
 	private List<OrganizationTypes> preferences;
+	private long rewards;
 
 	@Override
 	public String toString() {
@@ -118,5 +119,13 @@ public class User {
 
 	public void setPreferences(List<OrganizationTypes> preferences) {
 		this.preferences = preferences;
+	}
+
+	public long getRewards() {
+		return rewards;
+	}
+
+	public void setRewards(long rewards) {
+		this.rewards = rewards;
 	}
 }

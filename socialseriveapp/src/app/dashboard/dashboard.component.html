@@ -14,6 +14,7 @@
     <p *ngIf="isUser">Date of Birth: {{isUser?user.dob :organisation.dob}}</p>
     <p>Address: {{isUser?user.address :organisation.address}}</p>
     <p *ngIf="isUser">Preference: {{user.preferences}}</p>
+    <p *ngIf="isUser">My Rewards: {{user.rewards}} <img src="../../assets/coin.gif" style="width: 5%"> </p>
     <p *ngIf="!isUser">Organisation Type: {{organisation.organizationType}}</p>
   </mat-expansion-panel>
 </mat-accordion>
@@ -107,7 +108,7 @@
     <h2>MY EVENTS</h2>
   </div>
   <div class="col-lg-4" style="float:none;margin:auto;">
-    <button mat-flat-button color="primary">Load my events...</button>
+    <button mat-flat-button color="primary" (click)="fetchMyEvents()">Load my events...</button>
   </div>
 </div>
 

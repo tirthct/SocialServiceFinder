@@ -66,6 +66,7 @@ export class RegistrationFormComponent implements OnInit {
         pinCode: Number(this.pincode),
         password: this.password,
         preferences: this.prefs,
+        rewards: Number(0)
       }
       this.userRegistrationService.addUser(this.user).subscribe((res)=>{
         this.router.navigateByUrl('/login');

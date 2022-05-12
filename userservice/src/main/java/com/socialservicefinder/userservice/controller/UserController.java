@@ -51,6 +51,7 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<String> addUser(@RequestBody User user) {
 		try {
+			user.setRewards(0);
 			userService.addUser(user);
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		}
