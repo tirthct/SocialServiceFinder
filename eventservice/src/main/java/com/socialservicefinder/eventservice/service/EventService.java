@@ -11,18 +11,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Component
 public class EventService {
     private final EventRepository eventRepository;
     private final EventLookUpService eventLookUpService;
+    private final RegisteredEventsLookUpService registeredEventsLookUpService;
     private final int NO_OF_TRIES;
 
     @Autowired
-    public EventService(EventRepository eventRepository, EventLookUpService eventLookUpService) {
+    public EventService(EventRepository eventRepository, EventLookUpService eventLookUpService, RegisteredEventsLookUpService registeredEventsLookUpService) {
         this.eventRepository = eventRepository;
         this.eventLookUpService = eventLookUpService;
+        this.registeredEventsLookUpService = registeredEventsLookUpService;
         this.NO_OF_TRIES = 5;
     }
 
@@ -41,6 +44,23 @@ public class EventService {
         return events;
     }
 
+    public List<Event> fetchMyEvents(String id, boolean isOrganization) {
+        List<String> eventIds = new ArrayList<>();
+        if (isOrganization) {
+            return eventRepository.findEventByOrganizationId(id);
+        } else {
+            eventIds = registeredEventsLookUpService.fetchEventIdsByUserId(id);
+            List<Event> events = new ArrayList<>();
+            for (String eventId : eventIds) {
+                Optional<Event> event = eventRepository.findById(eventId);
+                if (event.isPresent()) {
+                    events.add(event.get());
+                }
+            }
+            return events;
+        }
+    }
+
     public void addEvent(Event e) {
         if (e == null || e.getName() == null || e.getAddress() == null || e.getDescription() == null) {
             throw new InvalidEventException("name, address or description cannot be null or empty");
@@ -48,7 +68,30 @@ public class EventService {
         insertEvent(e);
     }
 
-    public void insertEvent(Event e) {
+    public void updateEvent(Event e) {
+        if (e == null || e.getName() == null || e.getAddress() == null || e.getDescription() == null) {
+            throw new InvalidEventException("name, address or description cannot be null or empty");
+        }
+        updateEvents(e);
+    }
+
+    private void updateEvents(Event e) {
+        boolean id_assigned = false;
+        for (int tries = 0; tries < NO_OF_TRIES; tries++) {
+            try {
+                e.assign_id();
+                eventRepository.save(e);
+                eventLookUpService.save(new EventLookUp(e.getId(), e.getId(), e.toString()));
+                id_assigned = true;
+                break;
+            } catch (MongoWriteException ignored) {
+            }
+        }
+        if (!id_assigned)
+            throw new InvalidEventException("Please try after sometime.");
+    }
+
+    private void insertEvent(Event e) {
         boolean id_assigned = false;
         for (int tries = 0; tries < NO_OF_TRIES; tries++) {
             try {

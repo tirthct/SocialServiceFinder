@@ -27,12 +27,12 @@ public class OrganizationService {
         this.ASSIGN_ID_TRIES = 3;
     }
 
-    public List<Organization> getOrganizations(){
+    public List<Organization> getOrganizations() {
         return organizationRepository.findAll();
     }
 
     public void addOrganization(Organization organization) {
-        if(organization == null || organization.getEmail() == null || organization.getName() == null
+        if (organization == null || organization.getEmail() == null || organization.getName() == null
                 || organization.getPassword() == null)
             throw new IllegalArgumentException("organization, email, name or password cannot be null or empty");
 
@@ -40,35 +40,54 @@ public class OrganizationService {
         insertOrganization(organization);
     }
 
-    public void insertOrganization(Organization organization) {
+    public void updateOrganization(Organization organization) {
+        if (organization == null || organization.getEmail() == null || organization.getName() == null
+                || organization.getPassword() == null)
+            throw new IllegalArgumentException("organization, email, name or password cannot be null or empty");
+        updateOrganizations(organization);
+    }
+
+    private void updateOrganizations(Organization organization) {
+        boolean id_assigned = false;
+        for (int tries = 0; tries < ASSIGN_ID_TRIES; tries++) {
+            try {
+                organizationRepository.save(organization);
+                id_assigned = true;
+                break;
+            } catch (MongoWriteException ignored) {
+            }
+        }
+        if (!id_assigned)
+            throw new InvalidOrganizationException("Please try after sometime.");
+    }
+
+    private void insertOrganization(Organization organization) {
         // Try assigning ID to organization for TRIES number of times.
         boolean id_assigned = false;
-        for(int tries = 0; tries < ASSIGN_ID_TRIES; tries++){
-            try{
+        for (int tries = 0; tries < ASSIGN_ID_TRIES; tries++) {
+            try {
                 organization.assign_id();
                 organizationRepository.insert(organization);
                 id_assigned = true;
                 break;
-            }
-            catch (MongoWriteException ignored){
+            } catch (MongoWriteException ignored) {
             }
         }
-        if(!id_assigned)
+        if (!id_assigned)
             throw new InvalidOrganizationException("Please try after sometime.");
     }
 
-    public Organization getAuthOrganization(Login login){
-        if(login == null || login.getEmail()==null || login.getPassword() == null)
+    public Organization getAuthOrganization(Login login) {
+        if (login == null || login.getEmail() == null || login.getPassword() == null)
             throw new IllegalArgumentException("Login object or email or password cannot be null");
 
         login.setPassword(codec.encrypt(login.getPassword()));
-        Organization organization =organizationRepository.findOrganizationByEmail(login.getEmail());
+        Organization organization = organizationRepository.findOrganizationByEmail(login.getEmail());
 
-        if(organization!=null && organization.getPassword().equals(login.getPassword())) {
+        if (organization != null && organization.getPassword().equals(login.getPassword())) {
             System.out.println(organization);
             return organization;
-        }
-        else
+        } else
             throw new InvalidLoginException("Authentication Failed");
     }
 }
