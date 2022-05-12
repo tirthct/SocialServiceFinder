@@ -59,5 +59,18 @@ public class OrganizationController {
         }
     }
 
-
+    @PostMapping
+    @RequestMapping("/update/")
+    public ResponseEntity<String> updateOrganization(@RequestBody Organization organization) {
+        try {
+            organizationService.updateOrganization(organization);
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
+        } catch (InvalidOrganizationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    
 }
