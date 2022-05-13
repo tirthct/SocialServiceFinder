@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
       description: this.eventDescription,
       rewards: Number(this.eventRewards),
       address: this.eventLocation,
-      POCName: this.eventPOCName,
+      pocName: this.eventPOCName,
       phoneNo: Number(this.eventPOCContact),
       email: this.eventPOCEmail,
       city: this.eventCity,

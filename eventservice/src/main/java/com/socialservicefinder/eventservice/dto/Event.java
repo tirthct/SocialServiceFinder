@@ -19,7 +19,7 @@ public class Event {
     private long rewards;
     private long pinCode;
     private String email;
-    private String POCName;
+    private String pocName;
     private Date startDate;
     private Date endDate;
     private String organizationId;
@@ -27,7 +27,7 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo + ", email=" + email + ", POCName" + POCName
+        return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo + ", email=" + email + ", POCName=" + pocName
                 + ", address=" + address + ", city=" + city + ", rewards=" + rewards + ", pinCode="
                 + pinCode + ", startDate=" + startDate.toString() + ", endDate=" + endDate.toString() + "]";
     }
@@ -36,7 +36,7 @@ public class Event {
         super();
     }
 
-    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String POCName, Date startDate, Date endDate) {
+    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String pocName, Date startDate, Date endDate) {
         this.name = name;
         this.description = description;
         this.phoneNo = phoneNo;
@@ -45,7 +45,7 @@ public class Event {
         this.rewards = rewards;
         this.pinCode = pinCode;
         this.email = email;
-        this.POCName = POCName;
+        this.pocName = pocName;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -58,12 +58,12 @@ public class Event {
         this.email = email;
     }
 
-    public String getPOCName() {
-        return POCName;
+    public String getPocName() {
+        return pocName;
     }
 
-    public void setPOCName(String POCName) {
-        this.POCName = POCName;
+    public void setPocName(String pocName) {
+        this.pocName = pocName;
     }
 
     public void assign_id() {

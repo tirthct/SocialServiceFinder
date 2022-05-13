@@ -3,7 +3,7 @@ export interface Event{
     description: string;
     rewards: number;
     address: string;
-    POCName: string;
+    pocName: string;
     phoneNo: number;
     email: string;
     city: string;
