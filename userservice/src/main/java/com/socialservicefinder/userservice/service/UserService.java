@@ -1,9 +1,9 @@
 package com.socialservicefinder.userservice.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.mongodb.MongoWriteException;
-import com.socialservicefinder.eventservice.service.RegisteredEventsLookUpServiceImpl;
 import com.socialservicefinder.userservice.dto.Login;
 import com.socialservicefinder.userservice.exceptions.InvalidLoginException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +19,11 @@ import com.socialservicefinder.userservice.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
     private final Codec codec;
-    private final RegisteredEventsLookUpServiceImpl eventService;
     private final int ASSIGN_ID_TRIES;
 
     @Autowired
-    public UserService(UserRepository userRepository, RegisteredEventsLookUpServiceImpl eventService) throws Exception {
+    public UserService(UserRepository userRepository) throws Exception {
         this.userRepository = userRepository;
-        this.eventService = eventService;
         this.codec = new Codec();
         this.ASSIGN_ID_TRIES = 3;
     }
@@ -40,6 +38,14 @@ public class UserService {
 
         user.setPassword(codec.encrypt(user.getPassword()));
         insertUser(user);
+    }
+
+    public List<String> getEventIds(String userId) {
+        User user = userRepository.findById(userId);
+        if (user != null) {
+            return user.getEventIds();
+        }
+        return Collections.emptyList();
     }
 
     public void updateUser(User user) {
@@ -69,7 +75,6 @@ public class UserService {
             try {
                 user.assign_id();
                 userRepository.insert(user);
-                eventService.createRegisteredEvents(null);
                 id_assigned = true;
                 break;
             } catch (MongoWriteException ignored) {
