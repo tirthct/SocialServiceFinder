@@ -12,7 +12,6 @@ import java.util.Arrays;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.socialservicefinder.eventservice", "com.socialservicefinder.userservice"})
 public class UserserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserserviceApplication.class, args);

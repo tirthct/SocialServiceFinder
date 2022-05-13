@@ -5,6 +5,7 @@ import com.socialservicefinder.eventservice.dto.Event;
 import com.socialservicefinder.eventservice.dto.EventLookUp;
 import com.socialservicefinder.eventservice.exceptions.InvalidEventException;
 import com.socialservicefinder.eventservice.repository.EventRepository;
+import com.socialservicefinder.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,14 @@ import java.util.Optional;
 public class EventService {
     private final EventRepository eventRepository;
     private final EventLookUpService eventLookUpService;
-    private final RegisteredEventsLookUpService registeredEventsLookUpService;
+    private final UserService userService;
     private final int NO_OF_TRIES;
 
     @Autowired
-    public EventService(EventRepository eventRepository, EventLookUpService eventLookUpService, RegisteredEventsLookUpService registeredEventsLookUpService) {
+    public EventService(EventRepository eventRepository, EventLookUpService eventLookUpService, UserService userService) {
         this.eventRepository = eventRepository;
         this.eventLookUpService = eventLookUpService;
-        this.registeredEventsLookUpService = registeredEventsLookUpService;
+        this.userService = userService;
         this.NO_OF_TRIES = 5;
     }
 
@@ -45,17 +46,15 @@ public class EventService {
     }
 
     public List<Event> fetchMyEvents(String id, boolean isOrganization) {
-        List<String> eventIds = new ArrayList<>();
+        List<String> eventIds;
         if (isOrganization) {
             return eventRepository.findEventByOrganizationId(id);
         } else {
-            eventIds = registeredEventsLookUpService.fetchEventIdsByUserId(id);
+            eventIds = userService.getEventIds(id);
             List<Event> events = new ArrayList<>();
             for (String eventId : eventIds) {
                 Optional<Event> event = eventRepository.findById(eventId);
-                if (event.isPresent()) {
-                    events.add(event.get());
-                }
+                event.ifPresent(events::add);
             }
             return events;
         }
