@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
   events!: Event;
   id: string="";
   fetchMyEventsObject!:FetchMyEvents;
+  myEvents!: any[];
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -139,6 +140,7 @@ export class DashboardComponent implements OnInit {
     }
     this.dashboardService.fetchMyEvents(this.fetchMyEventsObject).subscribe((res)=>{
       console.log(res);
+      this.myEvents=JSON.parse(JSON.stringify(res));
     }, (err)=>{
       this._snackBar.open('My Events Fetch Failed!!', "",{
         horizontalPosition: this.horizontalPosition,
