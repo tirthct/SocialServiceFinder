@@ -3,7 +3,6 @@ package com.socialservicefinder.userservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -18,6 +17,7 @@ public class UserserviceApplication {
     }
 
     //CORS is some mechanism added by mordern browswers. just copy pasting. More Info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);

@@ -19,7 +19,7 @@ public class EventServiceApplication {
 
     //CORS is some mechanism added by mordern browswers. just copy pasting. More Info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     @Bean
-    public CorsFilter corsFilter() {
+    public CorsFilter corsFilter1() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));

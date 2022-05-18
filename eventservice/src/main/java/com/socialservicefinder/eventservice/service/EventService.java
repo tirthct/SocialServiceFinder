@@ -78,7 +78,6 @@ public class EventService {
         boolean id_assigned = false;
         for (int tries = 0; tries < NO_OF_TRIES; tries++) {
             try {
-                e.assign_id();
                 eventRepository.save(e);
                 eventLookUpService.save(new EventLookUp(e.getId(), e.getId(), e.toString()));
                 id_assigned = true;
