@@ -6,6 +6,7 @@ import {
 } from '@angular/material/snack-bar';
 import { Event } from '../users/models/Event';
 import {FetchMyEvents} from '../users/models/FetchMyEvents'
+import { FetchMyRewards } from '../users/models/FetchMyRewards';
 import { Organiser } from '../users/models/Organiser';
 import { SearchQuery } from '../users/models/SearchQuery';
 import { User } from '../users/models/User';
@@ -45,6 +46,8 @@ export class DashboardComponent implements OnInit {
   id: string="";
   fetchMyEventsObject!:FetchMyEvents;
   myEvents!: any[];
+  fetchMyRewardsObject!:FetchMyRewards;
+  myRewards!:Number;
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -54,6 +57,7 @@ export class DashboardComponent implements OnInit {
       console.log(this.user);
       this.id=JSON.parse(localStorage.getItem('userDetails') || '{}').id;
       console.log(this.user);
+      this.fetchMyRewards(this.id);
     }else{
       this.organisation = JSON.parse(localStorage.getItem('orgDetails') || '{}');
       this.id=JSON.parse(localStorage.getItem('orgDetails') || '{}').id;
@@ -143,6 +147,26 @@ export class DashboardComponent implements OnInit {
       this.myEvents=JSON.parse(JSON.stringify(res));
     }, (err)=>{
       this._snackBar.open('My Events Fetch Failed!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    });
+  }
+
+  clearEventsResult(): void{
+    this.myEvents=[];
+  }
+
+  fetchMyRewards(id: string): void{
+    
+    this.fetchMyRewardsObject={
+      id: this.id
+    };
+    this.dashboardService.fetchMyRewards(this.fetchMyRewardsObject).subscribe((res)=>{
+      this.myRewards=Number(JSON.parse(JSON.stringify(res)).rewards);
+    }, (err)=>{
+      this._snackBar.open('Fetch Failed for my Rewards!!', "",{
         horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,
         duration: 2000,

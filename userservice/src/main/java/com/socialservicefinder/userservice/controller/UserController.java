@@ -1,8 +1,11 @@
 package com.socialservicefinder.userservice.controller;
 
+import java.util.Collections;
 import java.util.List;
 
+import com.socialservicefinder.userservice.dto.FetchMyRewards;
 import com.socialservicefinder.userservice.dto.Login;
+import com.socialservicefinder.userservice.dto.Rewards;
 import com.socialservicefinder.userservice.exceptions.InvalidLoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,5 +74,17 @@ public class UserController {
         }
     }
 
+    @GetMapping
+    @RequestMapping("/fetchMyRewards/")
+    public ResponseEntity<Rewards> fetchRewards(@RequestBody FetchMyRewards f) {
+        try {
+            if(f.getId()==null || f.getId().length()==0){
+                return null;
+            }
+            var rewards=userService.fetchRewards(f);
+            return ResponseEntity.status(HttpStatus.OK).body(rewards);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 }
-

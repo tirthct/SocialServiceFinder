@@ -4,7 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.mongodb.MongoWriteException;
+import com.socialservicefinder.userservice.dto.FetchMyRewards;
 import com.socialservicefinder.userservice.dto.Login;
+import com.socialservicefinder.userservice.dto.Rewards;
+import com.socialservicefinder.userservice.exceptions.InvalidFetchMyRewardsException;
 import com.socialservicefinder.userservice.exceptions.InvalidLoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -96,6 +99,20 @@ public class UserService {
             return user;
         }
         throw new InvalidLoginException("Authentication Failed");
+    }
+
+    public Rewards fetchRewards(FetchMyRewards fetchMyRewards){
+        if(fetchMyRewards==null || fetchMyRewards.getId()==null || fetchMyRewards.getId().length()==0){
+            throw new InvalidFetchMyRewardsException("user id cannot be null or empty");
+        }
+        User user=userRepository.findById(fetchMyRewards.getId());
+        if(user!=null){
+            Rewards r=new Rewards();
+            r.setId(fetchMyRewards.getId());
+            r.setRewards(user.getRewards());
+            return r;
+        }
+        throw new InvalidFetchMyRewardsException("Invalid user id");
     }
 
 }

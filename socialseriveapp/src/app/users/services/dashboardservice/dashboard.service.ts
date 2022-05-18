@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { SearchQuery } from '../../models/SearchQuery';
 import { FetchMyEvents } from '../../models/FetchMyEvents';
+import { FetchMyRewards } from '../../models/FetchMyRewards';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class DashboardService {
   private user!: User;
   public isUser!: boolean; 
   private organisation!: Organiser;
-  private apiServerUrlUser = environment.baseUrlEvent;
+  private apiServerUrlEvent = environment.baseUrlEvent;
+  private apiServerUrlUser = environment.baseUrlUser;
   constructor(private http: HttpClient) { }
 
   public setUser(user :User){
@@ -40,18 +42,23 @@ export class DashboardService {
   }
 
   public createEvent(Event: Event): Observable<Event>{
-    var url=`${this.apiServerUrlUser}/event`;
+    var url=`${this.apiServerUrlEvent}/event`;
     return this.http.post<Event>(url, Event);
   }
 
   public searchEvents(SearchQuery: SearchQuery): Observable<SearchQuery>{
-    var url=`${this.apiServerUrlUser}/event/search/`;
+    var url=`${this.apiServerUrlEvent}/event/search/`;
     return this.http.post<SearchQuery>(url, SearchQuery);
   }
 
   public fetchMyEvents(FetchMyEvents: FetchMyEvents): Observable<FetchMyEvents>{
-    var url=`${this.apiServerUrlUser}/event/fetchMyEvents/`;
+    var url=`${this.apiServerUrlEvent}/event/fetchMyEvents/`;
     return this.http.post<FetchMyEvents>(url, FetchMyEvents);
+  }
+
+  public fetchMyRewards(FetchMyRewards: FetchMyRewards){
+    var url=`${this.apiServerUrlUser}/user/fetchMyRewards/`;
+    return this.http.post<FetchMyRewards>(url, FetchMyRewards);
   }
 
 }
