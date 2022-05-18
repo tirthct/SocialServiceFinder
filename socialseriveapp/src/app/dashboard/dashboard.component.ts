@@ -47,7 +47,6 @@ export class DashboardComponent implements OnInit {
   fetchMyEventsObject!:FetchMyEvents;
   myEvents!: any[];
   fetchMyRewardsObject!:FetchMyRewards;
-  myRewards!:Number;
   constructor(private dashboardService: DashboardService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -164,7 +163,7 @@ export class DashboardComponent implements OnInit {
       id: this.id
     };
     this.dashboardService.fetchMyRewards(this.fetchMyRewardsObject).subscribe((res)=>{
-      this.myRewards=Number(JSON.parse(JSON.stringify(res)).rewards);
+      this.user.rewards=(JSON.parse(JSON.stringify(res)).rewards);
     }, (err)=>{
       this._snackBar.open('Fetch Failed for my Rewards!!', "",{
         horizontalPosition: this.horizontalPosition,
