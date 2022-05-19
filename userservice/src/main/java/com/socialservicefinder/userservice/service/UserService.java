@@ -1,5 +1,6 @@
 package com.socialservicefinder.userservice.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(String userId){
+        return userRepository.findById(userId);
+    }
+
     public void addUser(User user) {
         if (user == null || user.getEmail() == null || user.getName() == null || user.getPassword() == null)
             throw new InvalidUserException("user or email or name or password cannot be null or empty");
@@ -45,8 +50,10 @@ public class UserService {
 
     public List<String> getEventIds(String userId) {
         User user = userRepository.findById(userId);
+        List<String> eventIds = new ArrayList<>();
         if (user != null) {
-            return user.getEventIds();
+            eventIds.addAll(user.getEventIds());
+            return eventIds;
         }
         return Collections.emptyList();
     }
