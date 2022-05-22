@@ -71,6 +71,21 @@ public class UserService {
         updateUsers(user);
     }
 
+    public void deleteUsers(User user) {
+        boolean id_assigned = false;
+        for (int tries = 0; tries < ASSIGN_ID_TRIES; tries++) {
+            try {
+                user.setDeleted(true);
+                userRepository.save(user);
+                id_assigned = true;
+                break;
+            } catch (MongoWriteException ignored) {
+            }
+        }
+        if (!id_assigned)
+            throw new InvalidUserException("Couldn't delete User, please try after sometime.");
+    }
+
     private void updateUsers(User user) {
         boolean id_assigned = false;
         for (int tries = 0; tries < ASSIGN_ID_TRIES; tries++) {

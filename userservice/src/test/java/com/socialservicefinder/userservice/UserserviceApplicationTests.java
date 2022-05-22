@@ -20,36 +20,36 @@ import com.socialservicefinder.userservice.service.UserService;
 
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = { UserserviceApplication.class })
+@SpringBootTest(classes = {UserserviceApplication.class})
 class UserserviceApplicationTests {
 
-	private static List<User> _users;
+    private static List<User> _users;
 
-	@Autowired
+    @Autowired
     private UserService userService;
 
-	@BeforeEach
-	public void init() {
-		_users = List.of(
-				new User("John Doe", "johndoe@gmail.com", LocalDate.of(2000, 10, 10),
-						"999-999-9999","Univesity of California, Irvine", "Irvine",
-						"demopass", 92612, List.of(OrganizationTypes.environmental)),
-				new User("Jane Doe", "janedoe@gmail.com", LocalDate.of(2005, 5, 1),
-						"999-999-9998", "Univesity of California, Los Angeles", "Los Angeles",
-						"demopass", 99999, List.of(OrganizationTypes.oldage)),
-				new User("June Doe", "junedoe@gmail.com", LocalDate.of(1985, 12, 30),
-						"999-999-9997","Univesity of California, San Diego", "San Diego",
-						"demopass", 88888, List.of(OrganizationTypes.environmental,
-						OrganizationTypes.orphanage)),
-				new User("Jake Doe", "jakedoe@gmail.com", LocalDate.of(2000, 10, 10),
-						"999-999-9996","Univesity of California, East Bay", "Easy Bay",
-						"demopass", 77777, List.of()));
-	}
+    @BeforeEach
+    public void init() {
+        _users = List.of(
+                new User("John Doe", "johndoe@gmail.com", LocalDate.of(2000, 10, 10),
+                        "999-999-9999", "Univesity of California, Irvine", "Irvine",
+                        "demopass", 92612, List.of(OrganizationTypes.environmental), false),
+                new User("Jane Doe", "janedoe@gmail.com", LocalDate.of(2005, 5, 1),
+                        "999-999-9998", "Univesity of California, Los Angeles", "Los Angeles",
+                        "demopass", 99999, List.of(OrganizationTypes.oldage), false),
+                new User("June Doe", "junedoe@gmail.com", LocalDate.of(1985, 12, 30),
+                        "999-999-9997", "Univesity of California, San Diego", "San Diego",
+                        "demopass", 88888, List.of(OrganizationTypes.environmental,
+                        OrganizationTypes.orphanage), false),
+                new User("Jake Doe", "jakedoe@gmail.com", LocalDate.of(2000, 10, 10),
+                        "999-999-9996", "Univesity of California, East Bay", "Easy Bay",
+                        "demopass", 77777, List.of(), false));
+    }
 
-	@Test
-	public void getUsers() {
-		Mockito.when(userService.getUsers()).thenReturn(_users);
-		List<User> user = userService.getUsers();
-		Assertions.assertEquals(user, _users);
-	}
+    @Test
+    public void getUsers() {
+        Mockito.when(userService.getUsers()).thenReturn(_users);
+        List<User> user = userService.getUsers();
+        Assertions.assertEquals(user, _users);
+    }
 }

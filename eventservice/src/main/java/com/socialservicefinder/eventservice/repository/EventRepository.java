@@ -8,5 +8,5 @@ import java.util.List;
 public interface EventRepository extends MongoRepository<Event, String> {
     List<Event> findEventByNameContains(String name);
 
-    List<Event> findEventByOrganizationId(String id);
+    List<Event> findEventByOrganizationIdAndDeletedIs(String id, boolean isDeleted);
 }

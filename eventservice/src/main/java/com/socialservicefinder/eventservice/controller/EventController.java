@@ -57,6 +57,19 @@ public class EventController {
         }
     }
 
+    @PostMapping
+    @RequestMapping("/delete/")
+    public ResponseEntity<String> deleteEvent(@RequestBody Event event) {
+        try {
+            eventService.deleteEvent(event);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } catch (InvalidEventException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
     @GetMapping
     @RequestMapping("/search/")
     public List<Event> getMatchingEvents(@RequestBody SearchQuery q) {
@@ -86,7 +99,7 @@ public class EventController {
             if (f.getId().length() == 0) {
                 return Collections.emptyList();
             }
-            return eventService.fetchMyEvents(f.getId(), f.getIsOrganizer());
+            return eventService.fetchMyEvents(f.getId(), f.getIsOrganizer(), false);
         } catch (Exception e) {
             return Collections.emptyList();
         }
