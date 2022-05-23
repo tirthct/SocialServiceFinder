@@ -97,11 +97,8 @@ public class UserService {
     public User getAuthUser(Login login) {
         if (login == null || login.getEmail() == null || login.getPassword() == null)
             throw new InvalidLoginException("user or email or password cannot be null or empty");
-
         login.setPassword(codec.encrypt(login.getPassword()));
-
         User user = userRepository.findUserByEmail(login.getEmail());
-
         if (user != null && login.getPassword().equals(user.getPassword())) {
             return user;
         }
@@ -120,6 +117,15 @@ public class UserService {
             return r;
         }
         throw new InvalidFetchMyRewardsException("Invalid user id");
+    }
+
+    public User setNewRewardsForUser(User user, long rewardPoints){
+        long newRewardPoints = user.getRewards() + rewardPoints;
+        if (newRewardPoints<0){
+            newRewardPoints=0;
+        }
+        user.setRewards(newRewardPoints);
+        return user;
     }
 
 }

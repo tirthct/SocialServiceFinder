@@ -120,9 +120,10 @@ public class EventService {
                 //eventRepository.save(event);
                 updateEvent(event);
                 user.getEventIds().add(eventId);
+                userService.setNewRewardsForUser(user,event.getRewards());
                 userService.updateUser(user);
             }
-        }catch (Exception exception){
+        } catch (Exception exception){
         }
     }
 
