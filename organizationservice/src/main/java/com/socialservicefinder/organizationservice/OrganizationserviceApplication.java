@@ -14,7 +14,7 @@ public class OrganizationserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationserviceApplication.class, args);
 	}
-	//CORS is some mechanism added by mordern browswers. just copy pasting. More Info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+	//CORS is some mechanism added by modern browsers. just copy pasting. More Info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();

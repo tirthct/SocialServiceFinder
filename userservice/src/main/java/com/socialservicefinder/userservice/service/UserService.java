@@ -1,5 +1,6 @@
 package com.socialservicefinder.userservice.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +36,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserById(String userId) {
+        return userRepository.findById(userId);
+    }
+
     public void addUser(User user) {
         if (user == null || user.getEmail() == null || user.getName() == null || user.getPassword() == null)
             throw new InvalidUserException("user or email or name or password cannot be null or empty");
@@ -45,15 +50,23 @@ public class UserService {
 
     public List<String> getEventIds(String userId) {
         User user = userRepository.findById(userId);
+        List<String> eventIds = new ArrayList<>();
         if (user != null) {
-            return user.getEventIds();
+            eventIds.addAll(user.getEventIds());
+            return eventIds;
         }
         return Collections.emptyList();
     }
 
     public void updateUser(User user) {
-        if (user == null || user.getEmail() == null || user.getName() == null || user.getPassword() == null)
-            throw new InvalidUserException("user or email or name or password cannot be null or empty");
+        if (user == null || user.getEmail() == null || user.getName() == null)
+            throw new InvalidUserException("user or email or name cannot be null or empty");
+        User oldUser = userRepository.findById(user.getId());
+        if (user.getPassword().length() == 0) {
+            user.setPassword(oldUser.getPassword());
+        } else {
+            user.setPassword(codec.encrypt(user.getPassword()));
+        }
         updateUsers(user);
     }
 
@@ -90,29 +103,35 @@ public class UserService {
     public User getAuthUser(Login login) {
         if (login == null || login.getEmail() == null || login.getPassword() == null)
             throw new InvalidLoginException("user or email or password cannot be null or empty");
-
         login.setPassword(codec.encrypt(login.getPassword()));
-
         User user = userRepository.findUserByEmail(login.getEmail());
-
         if (user != null && login.getPassword().equals(user.getPassword())) {
             return user;
         }
         throw new InvalidLoginException("Authentication Failed");
     }
 
-    public Rewards fetchRewards(FetchMyRewards fetchMyRewards){
-        if(fetchMyRewards==null || fetchMyRewards.getId()==null || fetchMyRewards.getId().length()==0){
+    public Rewards fetchRewards(FetchMyRewards fetchMyRewards) {
+        if (fetchMyRewards == null || fetchMyRewards.getId() == null || fetchMyRewards.getId().length() == 0) {
             throw new InvalidFetchMyRewardsException("user id cannot be null or empty");
         }
-        User user=userRepository.findById(fetchMyRewards.getId());
-        if(user!=null){
-            Rewards r=new Rewards();
+        User user = userRepository.findById(fetchMyRewards.getId());
+        if (user != null) {
+            Rewards r = new Rewards();
             r.setId(fetchMyRewards.getId());
             r.setRewards(user.getRewards());
             return r;
         }
         throw new InvalidFetchMyRewardsException("Invalid user id");
+    }
+
+    public User setNewRewardsForUser(User user, long rewardPoints) {
+        long newRewardPoints = user.getRewards() + rewardPoints;
+        if (newRewardPoints < 0) {
+            newRewardPoints = 0;
+        }
+        user.setRewards(newRewardPoints);
+        return user;
     }
 
 }

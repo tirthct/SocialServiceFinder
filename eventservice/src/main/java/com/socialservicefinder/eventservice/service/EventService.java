@@ -3,14 +3,17 @@ package com.socialservicefinder.eventservice.service;
 import com.mongodb.MongoWriteException;
 import com.socialservicefinder.eventservice.dto.Event;
 import com.socialservicefinder.eventservice.dto.EventLookUp;
+import com.socialservicefinder.eventservice.dto.RegisterEvent;
 import com.socialservicefinder.eventservice.exceptions.InvalidEventException;
 import com.socialservicefinder.eventservice.repository.EventRepository;
+import com.socialservicefinder.userservice.dto.User;
 import com.socialservicefinder.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,4 +107,24 @@ public class EventService {
         if (!id_assigned)
             throw new InvalidEventException("Please try after sometime.");
     }
+
+    public void registerUserForEvent(RegisterEvent eventToRegister) {
+        try {
+            String eventId = eventToRegister.getEventId();
+            String userId = eventToRegister.getUserId();
+            List<Event> events = findEventsByIds(Arrays.asList(eventId));
+            User user = userService.getUserById(userId);
+
+            for (Event event : events) {
+                event.getRegisteredUsers().add(userId);
+                //eventRepository.save(event);
+                updateEvent(event);
+                user.getEventIds().add(eventId);
+                userService.setNewRewardsForUser(user,event.getRewards());
+                userService.updateUser(user);
+            }
+        } catch (Exception exception){
+        }
+    }
+
 }

@@ -65,7 +65,7 @@ public class UserController {
     @RequestMapping("/update/")
     public ResponseEntity<String> updateUser(@RequestBody User user) {
         try {
-            userService.addUser(user);
+            userService.updateUser(user);
             return ResponseEntity.status(HttpStatus.OK).body(null);
         } catch (InvalidUserException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -78,10 +78,10 @@ public class UserController {
     @RequestMapping("/fetchMyRewards/")
     public ResponseEntity<Rewards> fetchRewards(@RequestBody FetchMyRewards f) {
         try {
-            if(f.getId()==null || f.getId().length()==0){
+            if (f.getId() == null || f.getId().length() == 0) {
                 return null;
             }
-            var rewards=userService.fetchRewards(f);
+            var rewards = userService.fetchRewards(f);
             return ResponseEntity.status(HttpStatus.OK).body(rewards);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);

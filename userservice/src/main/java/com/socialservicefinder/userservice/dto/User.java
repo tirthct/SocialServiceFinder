@@ -1,5 +1,7 @@
 package com.socialservicefinder.userservice.dto;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
@@ -22,7 +24,7 @@ public class User {
     private long pinCode;
     private List<OrganizationTypes> preferences;
     private long rewards;
-    private List<String> eventIds;
+    private Set<String> eventIds = new HashSet<>();
 
     @Override
     public String toString() {
@@ -144,15 +146,17 @@ public class User {
         this.rewards = rewards;
     }
 
-    public List<String> getEventIds() {
+    public Set<String> getEventIds() {
         return eventIds;
     }
 
-    public void setEventIds(List<String> eventIds) {
+    public void setEventIds(Set<String> eventIds) {
         this.eventIds = eventIds;
     }
 
     public void addEventId(String id) {
         eventIds.add(id);
     }
+
+
 }

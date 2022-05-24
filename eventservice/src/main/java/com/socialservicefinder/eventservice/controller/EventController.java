@@ -1,9 +1,6 @@
 package com.socialservicefinder.eventservice.controller;
 
-import com.socialservicefinder.eventservice.dto.Event;
-import com.socialservicefinder.eventservice.dto.EventLookUp;
-import com.socialservicefinder.eventservice.dto.FetchMyEvents;
-import com.socialservicefinder.eventservice.dto.SearchQuery;
+import com.socialservicefinder.eventservice.dto.*;
 import com.socialservicefinder.eventservice.exceptions.InvalidEventException;
 import com.socialservicefinder.eventservice.service.EventLookUpService;
 import com.socialservicefinder.eventservice.service.EventService;
@@ -92,6 +89,17 @@ public class EventController {
             return eventService.fetchMyEvents(f.getId(), f.getIsOrganizer());
         } catch (Exception e) {
             return Collections.emptyList();
+        }
+    }
+
+    @PutMapping
+    @RequestMapping("/registerForEvent")
+    public ResponseEntity<String> registerUserForEvent(@RequestBody RegisterEvent eventToRegister){
+        try {
+            eventService.registerUserForEvent(eventToRegister);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
