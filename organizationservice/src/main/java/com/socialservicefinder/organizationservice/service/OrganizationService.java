@@ -41,9 +41,14 @@ public class OrganizationService {
     }
 
     public void updateOrganization(Organization organization) {
-        if (organization == null || organization.getEmail() == null || organization.getName() == null
-                || organization.getPassword() == null)
-            throw new IllegalArgumentException("organization, email, name or password cannot be null or empty");
+        if (organization == null || organization.getEmail() == null || organization.getName() == null)
+            throw new IllegalArgumentException("organization, email, name cannot be null or empty");
+        Organization oldOrganization = organizationRepository.findById(organization.getId()).get();
+        if (organization.getPassword().length() == 0) {
+            organization.setPassword(oldOrganization.getPassword());
+        } else {
+            organization.setPassword(codec.encrypt(organization.getPassword()));
+        }
         updateOrganizations(organization);
     }
 
