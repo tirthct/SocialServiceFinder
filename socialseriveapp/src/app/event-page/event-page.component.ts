@@ -4,12 +4,9 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { Event } from '../users/models/Event';
-import { FetchMyEvents } from '../users/models/FetchMyEvents';
-import { Organiser } from '../users/models/Organiser';
-import { SearchQuery } from '../users/models/SearchQuery';
-import { User } from '../users/models/User';
-import { DashboardService } from '../users/services/dashboardservice/dashboard.service';
+import { EventRegistration } from '../users/models/EventRegistration';
+import { EventregistrationserviceService } from '../users/services/eventregistationservice/event-registration-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,16 +16,51 @@ import { DashboardService } from '../users/services/dashboardservice/dashboard.s
 })
 export class EventPageComponent implements OnInit {
   event!: any;
+  eventId: string="";
+  userId: string="";
+  isUser!: boolean;
+  myEvent!: boolean;
+  eventRegistrationObject!: EventRegistration;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private eventRegisterService:EventregistrationserviceService,private _snackBar: MatSnackBar, private router: Router,) { }
 
   ngOnInit(): void {
     this.event = JSON.parse(localStorage.getItem('currEvent') || '{}');
+    this.eventId = JSON.parse(localStorage.getItem('currEvent') || '{}').id;
+    this.userId = JSON.parse(localStorage.getItem('userDetails') || '{}').id;
+    this.isUser = JSON.parse(localStorage.getItem('status') || '{}');
+    this.myEvent = JSON.parse(localStorage.getItem('myEvent') || '{}');
     console.log(this.event);
   }
 
   registerEvent(): void{
-    console.log(this.event);
+    //console.log(this.event);
+      this.eventRegistrationObject = {
+        userId: this.userId,
+        eventId: this.eventId
+      }
+      console.log(this.eventRegistrationObject);
+      this.eventRegisterService.registerForEvent(this.eventRegistrationObject).subscribe((res)=>{
+        this._snackBar.open('Registartion Sucessfull!!', "",{
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 2000,
+        })
+        console.log(res);
+        //this.router.navigateByUrl("/dashboard")
+      },
+      (err)=>{
+        this._snackBar.open('Registartion Failed!!', "",{
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+          duration: 2000,
+        });
+      });
   }
 
+  deleteEvent(): void{
+    console.log(this.event);
+  }
 }

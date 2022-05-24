@@ -115,7 +115,7 @@
 <div>
   <mat-card class = "search-Results" *ngFor="let event of myEvents">
     <mat-card-title>
-      <p style="color:green; text-decoration: underline; cursor: pointer;" (click) = "getEventData(event)" [routerLink]="['/eventPage']">{{event.name}}</p>
+      <p style="color:green; text-decoration: underline; cursor: pointer;" (click) = "getEventDataMyEvent(event)" [routerLink]="['/eventPage']">{{event.name}}</p>
     </mat-card-title>
     <mat-card-content>
       <p style="color:gray; padding-top: 1px; padding-bottom: 1px;"> Start Date: {{event.startDate}}
