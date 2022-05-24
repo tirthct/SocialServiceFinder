@@ -12,8 +12,6 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 
-import { sha256 } from 'js-sha256';
-
 @Component({
     selector: 'app-update-profile',
     templateUrl: './update-profile.component.html',
@@ -124,7 +122,7 @@ export class UpdateProfileComponent implements OnInit{
           });
           localStorage.clear();
           this.router.navigateByUrl("/").then(() => {
-            // window.location.reload();
+            window.location.reload();
           });
         },
         (err)=>{
@@ -144,7 +142,7 @@ export class UpdateProfileComponent implements OnInit{
           });
           localStorage.clear();
           this.router.navigateByUrl("/").then(() => {
-            // window.location.reload();
+            window.location.reload();
           });
         },
         (err)=>{
