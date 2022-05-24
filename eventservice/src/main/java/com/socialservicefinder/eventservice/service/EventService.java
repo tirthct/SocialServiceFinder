@@ -57,7 +57,7 @@ public class EventService {
     public List<Event> fetchMyEvents(String id, boolean isOrganization, boolean isDeleted) {
         List<String> eventIds;
         if (isOrganization) {
-            return eventRepository.findEventByOrganizationIdAndDeletedIs(id, isDeleted);
+            return eventRepository.findEventByOrganizationIdAndDeleted(id, isDeleted);
         } else {
             eventIds = userService.getEventIds(id);
             List<Event> events = new ArrayList<>();

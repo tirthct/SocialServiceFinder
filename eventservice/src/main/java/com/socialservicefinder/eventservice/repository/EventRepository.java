@@ -9,4 +9,6 @@ public interface EventRepository extends MongoRepository<Event, String> {
     List<Event> findEventByNameContains(String name);
 
     List<Event> findEventByOrganizationIdAndDeletedIs(String id, boolean isDeleted);
+
+    List<Event> findEventByOrganizationIdAndDeleted(String id, boolean isDeleted);
 }

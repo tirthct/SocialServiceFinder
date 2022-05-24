@@ -102,8 +102,7 @@ public class OrganizationService {
             throw new IllegalArgumentException("Login object or email or password cannot be null");
 
         login.setPassword(codec.encrypt(login.getPassword()));
-        Organization organization = organizationRepository.findOrganizationByEmailAndDeleted(login.getEmail(), false);
-
+        Organization organization = organizationRepository.findByEmailAndDeletedFalse(login.getEmail());
         if (organization != null && organization.getPassword().equals(login.getPassword())) {
             System.out.println(organization);
             return organization;

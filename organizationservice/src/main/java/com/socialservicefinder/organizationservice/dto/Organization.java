@@ -16,14 +16,14 @@ public class Organization {
     private String city;
     private String password;
     private long pinCode;
-    private boolean isDeleted;
+    private boolean deleted;
     private OrganizationTypes organization_type;
 
     @Override
     public String toString() {
         return "Organization [name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
                 + ", address=" + address + ", city=" + city + ", pinCode=" + pinCode + ", organization_type="
-                + organization_type + ", isDeleted=" + isDeleted + "]";
+                + organization_type + ", isDeleted=" + deleted + "]";
     }
 
     public Organization() {
@@ -31,7 +31,7 @@ public class Organization {
     }
 
     public Organization(String name, String email, String phoneNo, String address, String city, String password,
-                        long pinCode, boolean isDeleted, OrganizationTypes organization_type) {
+                        long pinCode, boolean deleted, OrganizationTypes organization_type) {
         //TODO: Add check for unique uuid.
         this.name = name;
         this.email = email;
@@ -40,7 +40,7 @@ public class Organization {
         this.city = city;
         this.password = password;
         this.pinCode = pinCode;
-        this.isDeleted = isDeleted;
+        this.deleted = deleted;
         this.organization_type = organization_type;
     }
 
@@ -113,11 +113,11 @@ public class Organization {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 
     public OrganizationTypes getOrganizationType() {

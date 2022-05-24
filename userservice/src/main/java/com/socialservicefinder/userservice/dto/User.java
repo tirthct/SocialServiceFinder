@@ -25,7 +25,7 @@ public class User {
     private List<OrganizationTypes> preferences;
     private long rewards;
     private Set<String> eventIds = new HashSet<>();
-    private boolean isDeleted;
+    private boolean deleted;
 
     @Override
     public String toString() {
@@ -34,7 +34,7 @@ public class User {
             events.append(a).append(", ");
         }
         return "User [name=" + name + ", email=" + email + ", dob=" + dob + ", phoneNo=" + phoneNo + ", address="
-                + address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + ", id=" + id + ", eventIds=" + events + ", isDeleted=" + isDeleted + "]";
+                + address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + ", id=" + id + ", eventIds=" + events + ", isDeleted=" + deleted + "]";
     }
 
     public User() {
@@ -42,7 +42,7 @@ public class User {
     }
 
     public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, String password,
-                long pinCode, List<OrganizationTypes> preferences, boolean isDeleted) {
+                long pinCode, List<OrganizationTypes> preferences, boolean deleted) {
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -52,7 +52,7 @@ public class User {
         this.password = password;
         this.pinCode = pinCode;
         this.preferences = preferences;
-        this.isDeleted = isDeleted;
+        this.deleted = deleted;
     }
 
     public void assign_id() {
@@ -161,10 +161,10 @@ public class User {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 }
