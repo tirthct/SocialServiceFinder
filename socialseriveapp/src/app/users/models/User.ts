@@ -9,4 +9,5 @@ export interface User {
 	password: string;
 	preferences: string[];
 	rewards: number;
+	isDeleted: boolean;
 }

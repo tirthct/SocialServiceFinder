@@ -66,7 +66,8 @@ export class RegistrationFormComponent implements OnInit {
         pinCode: Number(this.pincode),
         password: this.password,
         preferences: this.prefs,
-        rewards: Number(0)
+        rewards: Number(0),
+        isDeleted: false
       }
       this.userRegistrationService.addUser(this.user).subscribe((res)=>{
         this.router.navigateByUrl('/login');
@@ -90,6 +91,7 @@ export class RegistrationFormComponent implements OnInit {
         pinCode: Number(this.pincode),
         password: this.password,
         organizationType: this.orgTypeChosen,
+        isDeleted: false
       }
       this.organisationRegistrationService.addOrganiser(this.organiser).subscribe((res)=>{
         this.router.navigateByUrl('/login');
