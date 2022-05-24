@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Document("events")
@@ -23,7 +23,7 @@ public class Event {
     private Date startDate;
     private Date endDate;
     private String organizationId;
-    private List<String> registeredUsers;
+    private Set<String> registeredUsers;
 
     @Override
     public String toString() {
@@ -158,11 +158,11 @@ public class Event {
         this.organizationId = organizationId;
     }
 
-    public List<String> getRegisteredUsers() {
+    public Set<String> getRegisteredUsers() {
         return registeredUsers;
     }
 
-    public void setRegisteredUsers(List<String> registeredUsers) {
+    public void setRegisteredUsers(Set<String> registeredUsers) {
         this.registeredUsers = registeredUsers;
     }
 
