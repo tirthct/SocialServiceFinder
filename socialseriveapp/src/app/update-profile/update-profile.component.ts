@@ -103,6 +103,12 @@ export class UpdateProfileComponent implements OnInit{
         }else{
           this.organiser.password=this.password;
         }
+      }else{
+        if(this.isUser){
+          this.user.password="";
+        }else{
+          this.organiser.password="";
+        }
       }
 
       console.log("Sending this to the update Organiser");
@@ -118,7 +124,7 @@ export class UpdateProfileComponent implements OnInit{
           });
           localStorage.clear();
           this.router.navigateByUrl("/").then(() => {
-            window.location.reload();
+            // window.location.reload();
           });
         },
         (err)=>{
@@ -138,7 +144,7 @@ export class UpdateProfileComponent implements OnInit{
           });
           localStorage.clear();
           this.router.navigateByUrl("/").then(() => {
-            window.location.reload();
+            // window.location.reload();
           });
         },
         (err)=>{
