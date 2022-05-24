@@ -72,5 +72,18 @@ public class OrganizationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    
+
+    @PostMapping
+    @RequestMapping("/delete/")
+    public ResponseEntity<String> deleteOrganization(@RequestBody Organization organization) {
+        try {
+            organizationService.deleteOrganization(organization);
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
+        } catch (InvalidOrganizationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }

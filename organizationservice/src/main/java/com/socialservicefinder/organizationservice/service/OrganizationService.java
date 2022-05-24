@@ -52,6 +52,21 @@ public class OrganizationService {
         updateOrganizations(organization);
     }
 
+    public void deleteOrganization(Organization organization) {
+        boolean id_assigned = false;
+        for (int tries = 0; tries < ASSIGN_ID_TRIES; tries++) {
+            try {
+                organization.setDeleted(true);
+                organizationRepository.save(organization);
+                id_assigned = true;
+                break;
+            } catch (MongoWriteException ignored) {
+            }
+        }
+        if (!id_assigned)
+            throw new InvalidOrganizationException("Unable to delete Organization, please try after sometime.");
+    }
+
     private void updateOrganizations(Organization organization) {
         boolean id_assigned = false;
         for (int tries = 0; tries < ASSIGN_ID_TRIES; tries++) {
@@ -87,7 +102,7 @@ public class OrganizationService {
             throw new IllegalArgumentException("Login object or email or password cannot be null");
 
         login.setPassword(codec.encrypt(login.getPassword()));
-        Organization organization = organizationRepository.findOrganizationByEmail(login.getEmail());
+        Organization organization = organizationRepository.findOrganizationByEmailAndDeleted(login.getEmail(), false);
 
         if (organization != null && organization.getPassword().equals(login.getPassword())) {
             System.out.println(organization);

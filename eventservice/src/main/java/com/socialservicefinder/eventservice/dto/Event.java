@@ -24,19 +24,20 @@ public class Event {
     private Date endDate;
     private String organizationId;
     private Set<String> registeredUsers;
+    private boolean isDeleted;
 
     @Override
     public String toString() {
         return "Event [name=" + name + ", description=" + description + ", phoneNo=" + phoneNo + ", email=" + email + ", POCName=" + pocName
                 + ", address=" + address + ", city=" + city + ", rewards=" + rewards + ", pinCode="
-                + pinCode + ", startDate=" + startDate.toString() + ", endDate=" + endDate.toString() + "]";
+                + pinCode + ", startDate=" + startDate.toString() + ", endDate=" + endDate.toString() + ", isDeleted=" + isDeleted + "]";
     }
 
     public Event() {
         super();
     }
 
-    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String pocName, Date startDate, Date endDate) {
+    public Event(String name, String description, String phoneNo, String address, String city, long rewards, long pinCode, String email, String pocName, Date startDate, Date endDate, boolean isDeleted) {
         this.name = name;
         this.description = description;
         this.phoneNo = phoneNo;
@@ -48,6 +49,7 @@ public class Event {
         this.pocName = pocName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.isDeleted = isDeleted;
     }
 
     public String getEmail() {
@@ -148,6 +150,14 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public String getOrganizationId() {

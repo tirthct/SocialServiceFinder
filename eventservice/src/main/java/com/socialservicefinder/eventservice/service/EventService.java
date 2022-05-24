@@ -45,20 +45,27 @@ public class EventService {
     public List<Event> findEventsByIds(List<String> eventIds) {
         Iterable<Event> itr = eventRepository.findAllById(eventIds);
         List<Event> events = new ArrayList<>();
-        itr.forEach(events::add);
+        while (itr.iterator().hasNext()) {
+            Event e = itr.iterator().next();
+            if (!e.isDeleted()) {
+                events.add(e);
+            }
+        }
         return events;
     }
 
-    public List<Event> fetchMyEvents(String id, boolean isOrganization) {
+    public List<Event> fetchMyEvents(String id, boolean isOrganization, boolean isDeleted) {
         List<String> eventIds;
         if (isOrganization) {
-            return eventRepository.findEventByOrganizationId(id);
+            return eventRepository.findEventByOrganizationIdAndDeletedIs(id, isDeleted);
         } else {
             eventIds = userService.getEventIds(id);
             List<Event> events = new ArrayList<>();
             for (String eventId : eventIds) {
                 Optional<Event> event = eventRepository.findById(eventId);
-                event.ifPresent(events::add);
+                if (event.isPresent() && !event.get().isDeleted()) {
+                    events.add(event.get());
+                }
             }
             return events;
         }
@@ -77,6 +84,25 @@ public class EventService {
             throw new InvalidEventException("name, address or description cannot be null or empty");
         }
         updateEvents(e);
+    }
+
+    public void deleteEvent(Event e) {
+        if (e == null || e.getName() == null || e.getAddress() == null || e.getDescription() == null) {
+            throw new InvalidEventException("Cannot delete event: name, address or description cannot be null or empty");
+        }
+        boolean id_assigned = false;
+        for (int tries = 0; tries < NO_OF_TRIES; tries++) {
+            try {
+                e.setDeleted(true);
+                eventRepository.save(e);
+                eventLookUpService.delete(new EventLookUp(e.getId(), e.getId(), e.toString()));
+                id_assigned = true;
+                break;
+            } catch (MongoWriteException ignored) {
+            }
+        }
+        if (!id_assigned)
+            throw new InvalidEventException("Please try after sometime.");
     }
 
     private void updateEvents(Event e) {
