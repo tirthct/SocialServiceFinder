@@ -2,6 +2,7 @@ package com.socialservicefinder.userservice.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import com.mongodb.MongoWriteException;
@@ -43,7 +44,7 @@ public class UserService {
     public void addUser(User user) {
         if (user == null || user.getEmail() == null || user.getName() == null || user.getPassword() == null)
             throw new InvalidUserException("user or email or name or password cannot be null or empty");
-
+        user.setEventIds(new HashSet<>());
         user.setPassword(codec.encrypt(user.getPassword()));
         insertUser(user);
     }

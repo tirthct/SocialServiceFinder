@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.HashSet;
 
 @Service
 @Component
@@ -67,6 +68,7 @@ public class EventService {
         if (e == null || e.getName() == null || e.getAddress() == null || e.getDescription() == null) {
             throw new InvalidEventException("name, address or description cannot be null or empty");
         }
+        e.setRegisteredUsers(new HashSet<>());
         insertEvent(e);
     }
 
@@ -120,11 +122,10 @@ public class EventService {
                 //eventRepository.save(event);
                 updateEvent(event);
                 user.getEventIds().add(eventId);
-                userService.setNewRewardsForUser(user,event.getRewards());
+                userService.setNewRewardsForUser(user, event.getRewards());
                 userService.updateUser(user);
             }
-        } catch (Exception exception){
+        } catch (Exception exception) {
         }
     }
-
 }
