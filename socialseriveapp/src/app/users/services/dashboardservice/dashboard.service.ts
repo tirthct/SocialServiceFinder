@@ -17,8 +17,7 @@ export class DashboardService {
   private user!: User;
   public isUser!: boolean; 
   private organisation!: Organiser;
-  private apiServerUrlEvent = environment.baseUrlEvent;
-  private apiServerUrlUser = environment.baseUrlUser;
+  private apiServerUrlUser = environment.baseUrlEvent;
   constructor(private http: HttpClient) { }
 
   public setUser(user :User){
@@ -42,17 +41,17 @@ export class DashboardService {
   }
 
   public createEvent(Event: Event): Observable<Event>{
-    var url=`${this.apiServerUrlEvent}/event`;
+    var url=`${this.apiServerUrlUser}/event`;
     return this.http.post<Event>(url, Event);
   }
 
   public searchEvents(SearchQuery: SearchQuery): Observable<SearchQuery>{
-    var url=`${this.apiServerUrlEvent}/event/search/`;
+    var url=`${this.apiServerUrlUser}/event/search/`;
     return this.http.post<SearchQuery>(url, SearchQuery);
   }
 
   public fetchMyEvents(FetchMyEvents: FetchMyEvents): Observable<FetchMyEvents>{
-    var url=`${this.apiServerUrlEvent}/event/fetchMyEvents/`;
+    var url=`${this.apiServerUrlUser}/event/fetchMyEvents/`;
     return this.http.post<FetchMyEvents>(url, FetchMyEvents);
   }
 
