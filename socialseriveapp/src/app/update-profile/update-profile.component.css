@@ -1,0 +1,32 @@
+.form-input-field{
+    position: relative;
+    padding-left:1rem;
+}
+
+.form-container{
+    position: relative;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 1em;
+    margin-top: 3%;
+}
+
+form{
+    position: relative;
+    margin-top: 5%;
+}
+mat-card-title{
+    position: relative;
+    padding-top: 5%;
+}
+
+mat-radio-button{
+    position: relative;
+    padding: 1rem;
+}
+
+#dobForm{
+    position: relative;
+    width: 46%;
+}
