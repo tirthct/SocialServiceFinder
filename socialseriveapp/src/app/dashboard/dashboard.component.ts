@@ -77,7 +77,7 @@ export class DashboardComponent implements OnInit {
       startDate: this.startDate,
       endDate: this.endDate,
       organizationId: this.id,
-      isDeleted: false
+      deleted: false
     }
 
     console.log(this.createEventObject);

@@ -7,7 +7,7 @@ import {
 import { EventRegistration } from '../users/models/EventRegistration';
 import { EventregistrationserviceService } from '../users/services/eventregistationservice/event-registration-service.service';
 import { Router } from '@angular/router';
-
+import {EventDeleteServiceService} from '../users/services/eventdeletionservice/event-delete-service.service';
 
 @Component({
   selector: 'app-event-page',
@@ -24,7 +24,8 @@ export class EventPageComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  constructor(private eventRegisterService:EventregistrationserviceService,private _snackBar: MatSnackBar, private router: Router,) { }
+  constructor(private eventRegisterService:EventregistrationserviceService,private _snackBar: MatSnackBar, private router: Router,
+              private eventDeletionService: EventDeleteServiceService) { }
 
   ngOnInit(): void {
     this.event = JSON.parse(localStorage.getItem('currEvent') || '{}');
@@ -43,13 +44,13 @@ export class EventPageComponent implements OnInit {
       }
       console.log(this.eventRegistrationObject);
       this.eventRegisterService.registerForEvent(this.eventRegistrationObject).subscribe((res)=>{
-        this._snackBar.open('Registartion Sucessfull!!', "",{
+        this._snackBar.open('Registration Successful!!', "",{
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
           duration: 2000,
         })
         console.log(res);
-        //this.router.navigateByUrl("/dashboard")
+        this.router.navigateByUrl("/dashboard")
       },
       (err)=>{
         this._snackBar.open('Registartion Failed!!', "",{
@@ -61,6 +62,24 @@ export class EventPageComponent implements OnInit {
   }
 
   deleteEvent(): void{
+    this.event.deleted = true;
     console.log(this.event);
+    this.eventDeletionService.deleteEvent(this.event).subscribe((res)=>{
+      this._snackBar.open('Deletion Successful!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      })
+      console.log(res);
+      this.router.navigateByUrl("/dashboard")
+    },
+    (err)=>{
+      this._snackBar.open('Deletion Failed!!', "",{
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+        duration: 2000,
+      });
+    });
+
   }
 }

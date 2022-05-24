@@ -11,5 +11,5 @@ export interface Event{
     startDate: Date;
     endDate: Date;
     organizationId: string;
-    isDeleted: false;
+    deleted: false;
 }
