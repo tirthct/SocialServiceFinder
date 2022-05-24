@@ -8,6 +8,7 @@
 			<span>
 				<button *ngIf="!loginStatus" id="loginBtn" mat-button [routerLink]="['/login']"> Login </button>
 				<button *ngIf="!loginStatus" id="registerBtn" mat-button [routerLink]="['/register']"> Register </button>
+				<button *ngIf="loginStatus" id="updateProfileBtn" mat-button [routerLink]="['/updateProfile']"> Update Profile </button>
 				<button *ngIf="loginStatus" id="dashboardBtn" mat-button [routerLink]="['/dashboard']"> Dashboard </button>
 				<button id="contactBtn"mat-button [routerLink]="['/contact']"> Contact us </button>
 				<button *ngIf="loginStatus" id="logoutBtn" mat-button (click)="logout()" [routerLink]="['']"> Logout </button>
