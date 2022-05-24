@@ -14,13 +14,12 @@ public class OrganizationserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationserviceApplication.class, args);
 	}
-
-	//CORS is some mechanism added by mordern browswers. just copy pasting. More Info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+	//CORS is some mechanism added by modern browsers. just copy pasting. More Info: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 	@Bean
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4202"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
 				"Access-Control-Request-Method", "Access-Control-Request-Headers"));

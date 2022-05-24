@@ -3,6 +3,7 @@
 
 # Log file
 *.log
+*.iml
 
 # BlueJ files
 *.ctxt
@@ -77,3 +78,5 @@ baseline.json
 
 # Husky
 .husky/_
+
+.angular

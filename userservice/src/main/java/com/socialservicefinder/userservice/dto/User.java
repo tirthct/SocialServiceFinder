@@ -1,6 +1,9 @@
 package com.socialservicefinder.userservice.dto;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,114 +12,159 @@ import java.util.List;
 
 @Document("users")
 public class User {
-	@Id
-	private String id;
-	private String name;
-	private String email;
-	private LocalDate dob;
-	private String phoneNo;
-	private String address;
-	private String city;
-	private String password;
-	private long pinCode;
-	private List<OrganizationTypes> preferences;
+    @Id
+    private String id;
+    private String name;
+    private String email;
+    private LocalDate dob;
+    private String phoneNo;
+    private String address;
+    private String city;
+    private String password;
+    private long pinCode;
+    private List<OrganizationTypes> preferences;
+    private long rewards;
+    private Set<String> eventIds = new HashSet<>();
+    private boolean deleted;
 
-	@Override
-	public String toString() {
-		return "User [name=" + name + ", email=" + email + ", dob=" + dob + ", phoneNo=" + phoneNo + ", address="
-				+ address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + "]";
-	}
+    @Override
+    public String toString() {
+        StringBuilder events = new StringBuilder();
+        for (String a : eventIds) {
+            events.append(a).append(", ");
+        }
+        return "User [name=" + name + ", email=" + email + ", dob=" + dob + ", phoneNo=" + phoneNo + ", address="
+                + address + ", city=" + city + ", pinCode=" + pinCode + ", preferences=" + preferences + ", id=" + id + ", eventIds=" + events + ", isDeleted=" + deleted + "]";
+    }
 
-	public User() {
-		super();
-	}
+    public User() {
+        super();
+    }
 
-	public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, String password,
-				long pinCode, List<OrganizationTypes> preferences) {
-		this.name = name;
-		this.email = email;
-		this.dob = dob;
-		this.phoneNo = phoneNo;
-		this.address = address;
-		this.city = city;
-		this.password = password;
-		this.pinCode = pinCode;
-		this.preferences = preferences;
-	}
+    public User(String name, String email, LocalDate dob, String phoneNo, String address, String city, String password,
+                long pinCode, List<OrganizationTypes> preferences, boolean deleted) {
+        this.name = name;
+        this.email = email;
+        this.dob = dob;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.city = city;
+        this.password = password;
+        this.pinCode = pinCode;
+        this.preferences = preferences;
+        this.deleted = deleted;
+    }
 
-	public void assign_id(){
-		this.id = UUID.randomUUID().toString();
-	}
+    public void assign_id() {
+        this.id = UUID.randomUUID().toString();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public LocalDate getDob() {
-		return dob;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDob(LocalDate dob) {
-		this.dob = dob;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getPhoneNo() {
-		return phoneNo;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPhoneNo(String phoneNo) {
-		this.phoneNo = phoneNo;
-	}
+    public LocalDate getDob() {
+        return dob;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getPhoneNo() {
+        return phoneNo;
+    }
 
-	public String getCity() {
-		return city;
-	}
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public long getPinCode() {
-		return pinCode;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public void setPinCode(long pinCode) {
-		this.pinCode = pinCode;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public List<OrganizationTypes> getPreferences() {
-		return preferences;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setPreferences(List<OrganizationTypes> preferences) {
-		this.preferences = preferences;
-	}
+    public long getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(long pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public List<OrganizationTypes> getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(List<OrganizationTypes> preferences) {
+        this.preferences = preferences;
+    }
+
+    public long getRewards() {
+        return rewards;
+    }
+
+    public void setRewards(long rewards) {
+        this.rewards = rewards;
+    }
+
+    public Set<String> getEventIds() {
+        return eventIds;
+    }
+
+    public void setEventIds(Set<String> eventIds) {
+        this.eventIds = eventIds;
+    }
+
+    public void addEventId(String id) {
+        eventIds.add(id);
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

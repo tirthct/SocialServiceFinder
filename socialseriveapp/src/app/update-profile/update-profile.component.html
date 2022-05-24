@@ -1,0 +1,58 @@
+<mat-card class="form-container">
+    <mat-card-title style="text-align: center;">Update Profile</mat-card-title><hr>
+    <form action="post">
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" placeholder="Eg. John" name="fName" id="fName"
+                [(ngModel)]="name">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Phone No</mat-label>
+            <input matInput type="text" placeholder="Eg. 1234567890" name="phNo" id="phNo"
+                [(ngModel)]="phNo">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Address Line #1</mat-label>
+            <input matInput type="text" placeholder="Eg. Lombard Street" name="addr" id="addr"
+                [(ngModel)]="addr">
+        </mat-form-field><br>
+
+        
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>City</mat-label>
+            <input matInput type="text" placeholder="Eg. San Francisco" name="city" id="city"
+                [(ngModel)]="city">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Pincode</mat-label>
+            <input matInput type="text" placeholder="Eg. 12345" name="pincode" id="pincode"
+                [(ngModel)]="pincode">
+            <mat-hint align="start" *ngIf="pincode.length!=5 || !isNumber(pincode)" class="errorHint">Should be 5 digits
+            </mat-hint>
+        </mat-form-field><br>
+
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="**********" name="password" id="password"
+                [(ngModel)]="password" maxlength="15" #input>
+            <!-- <mat-hint align="end">{{password.length||0}}/15</mat-hint> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-input-field">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" placeholder="**********" name="cPassword" id="cPassword"
+                [(ngModel)]="cPassword">
+            <mat-hint align="start" *ngIf="cPassword!=password" class="errorHint">Passwords do not match</mat-hint>
+            <!-- <mat-hint align="end">{{cPassword.length||0}}/15</mat-hint> -->
+        </mat-form-field>
+
+        <mat-card-actions align="end">
+            <button mat-button name="regBtn" id="regBtn" (click)="updateDetails()">Update</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

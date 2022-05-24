@@ -8,4 +8,5 @@ export interface Organiser {
 	pinCode: number;
 	password: string;
 	organizationType: string;
+	deleted: false;
 }

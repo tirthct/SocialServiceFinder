@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+
   
   login(): void {
 
@@ -44,9 +44,13 @@ export class LoginComponent implements OnInit {
 
     if(this.userType == "User"){
       this.loginserviceService.loginUser(this.loginObject).subscribe((res)=>{
+        localStorage.setItem('userDetails', JSON.stringify(res));
+        localStorage.setItem('status',JSON.stringify(true));
+        localStorage.setItem('loginStatus', "1");
         this.dashboardService.setUser(res);
-        this.router.navigateByUrl("/dashboard");
-
+        this.router.navigateByUrl("/dashboard").then(() => {
+          window.location.reload();
+        });
       },
       (err)=>{
         this._snackBar.open('Login Failed!!', "",{
@@ -58,10 +62,13 @@ export class LoginComponent implements OnInit {
     }
     else if(this.userType == "Organiser"){
       this.loginserviceService.loginOrganiser(this.loginObject).subscribe((res)=>{
-        
+        localStorage.setItem('orgDetails', JSON.stringify(res));
+        localStorage.setItem('status',JSON.stringify(false));
+        localStorage.setItem('loginStatus', "1");
         this.dashboardService.setOrgniser(res);
-        this.router.navigateByUrl("/dashboard");
-
+        this.router.navigateByUrl("/dashboard").then(() => {
+          window.location.reload();
+        });
       },
       (err)=>{
         this._snackBar.open('Login Failed!!', "",{

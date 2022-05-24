@@ -1,0 +1,17 @@
+<div>
+<mat-card class = "search-Results">
+<mat-card-title>
+    <h1 class="title">{{event.name}}</h1>
+</mat-card-title>
+    <p class = "details"> Start Date: {{event.startDate}}
+    <br>Contact: {{event.phoneNo}}
+    <br>Email: {{event.email}}
+    <br>Address: {{event.address}}, {{event.city}} , {{event.pinCode}}</p>
+    <p class = "description" style="text-decoration: underline; font-size: 16px; font-weight: bold;">Description:</p>
+    <h3 class = "description">{{event.description}}</h3>
+    <button  *ngIf = "!myEvent && isUser" mat-raised-button color="primary" name="eventBtn" id="eventBtn" (click)="registerEvent()">Register</button>
+    <button  *ngIf = "myEvent && !isUser" mat-raised-button color="primary" name="eventBtn" id="eventBtn" (click)="deleteEvent()">Delete</button>
+    <button  *ngIf = "myEvent && isUser" mat-raised-button color="primary" name="eventBtn" id="eventBtn">Cancel Registration</button>
+</mat-card>
+</div>
+

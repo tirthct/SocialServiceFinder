@@ -66,6 +66,8 @@ export class RegistrationFormComponent implements OnInit {
         pinCode: Number(this.pincode),
         password: this.password,
         preferences: this.prefs,
+        rewards: Number(0),
+        deleted: false
       }
       this.userRegistrationService.addUser(this.user).subscribe((res)=>{
         this.router.navigateByUrl('/login');
@@ -80,7 +82,7 @@ export class RegistrationFormComponent implements OnInit {
     }
     else if (this.userType == "Organiser") {
       this.organiser = {
-        name: `${this.fName} ${this.lName}`,
+        name: this.fName,
         email: this.email,
         dob: this.dob,
         phoneNo: this.phNo,
@@ -89,6 +91,7 @@ export class RegistrationFormComponent implements OnInit {
         pinCode: Number(this.pincode),
         password: this.password,
         organizationType: this.orgTypeChosen,
+        deleted: false
       }
       this.organisationRegistrationService.addOrganiser(this.organiser).subscribe((res)=>{
         this.router.navigateByUrl('/login');

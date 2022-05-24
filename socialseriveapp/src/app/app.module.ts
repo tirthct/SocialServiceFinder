@@ -28,6 +28,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { EventPageComponent } from './event-page/event-page.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 
 
@@ -43,7 +45,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ContactusComponent,
     NavbarComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    EventPageComponent,
+    UpdateProfileComponent
   ],
   imports: [
     CommonModule,

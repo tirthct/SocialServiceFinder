@@ -29,15 +29,13 @@ public class OrganizationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Organization> authOrganization(@RequestBody Login login){
-        try{
+    public ResponseEntity<Organization> authOrganization(@RequestBody Login login) {
+        try {
             var organization = organizationService.getAuthOrganization(login);
             return ResponseEntity.status(HttpStatus.OK).body(organization);
-        }
-        catch (InvalidLoginException e){
-            return ResponseEntity.status(HttpStatus .BAD_REQUEST).body(null);
-        }
-        catch (Exception e){
+        } catch (InvalidLoginException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
@@ -54,14 +52,38 @@ public class OrganizationController {
             organizationService.addOrganization(organization);
             ObjectMapper mapper = new ObjectMapper();
             return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
-        }
-        catch (InvalidOrganizationException e) {
+        } catch (InvalidOrganizationException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
+    @PostMapping
+    @RequestMapping("/update/")
+    public ResponseEntity<String> updateOrganization(@RequestBody Organization organization) {
+        try {
+            organizationService.updateOrganization(organization);
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
+        } catch (InvalidOrganizationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
+    @PostMapping
+    @RequestMapping("/delete/")
+    public ResponseEntity<String> deleteOrganization(@RequestBody Organization organization) {
+        try {
+            organizationService.deleteOrganization(organization);
+            ObjectMapper mapper = new ObjectMapper();
+            return ResponseEntity.status(HttpStatus.OK).body(mapper.writeValueAsString(organization));
+        } catch (InvalidOrganizationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
