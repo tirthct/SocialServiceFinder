@@ -80,7 +80,7 @@ export class RegistrationFormComponent implements OnInit {
     }
     else if (this.userType == "Organiser") {
       this.organiser = {
-        name: `${this.fName} ${this.lName}`,
+        name: this.fName,
         email: this.email,
         dob: this.dob,
         phoneNo: this.phNo,

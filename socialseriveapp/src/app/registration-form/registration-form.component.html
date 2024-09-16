@@ -1,5 +1,6 @@
 <mat-card class="form-container">
-    <mat-card-title>User Registration</mat-card-title>
+    <mat-card-title *ngIf="userType == 'User'">User Registration</mat-card-title>
+    <mat-card-title *ngIf="userType != 'User'">Organization Registration</mat-card-title>
     <form action="post">
         <mat-radio-group name="userType" [(ngModel)]="userType" required="required">
             <mat-radio-button *ngFor="let option of options" [value]="option">
@@ -8,12 +9,13 @@
         </mat-radio-group><br>
 
         <mat-form-field appearance="outline" class="form-input-field">
-            <mat-label>First Name</mat-label>
+            <mat-label *ngIf="userType == 'User'">First Name</mat-label>
+            <mat-label *ngIf="userType != 'User'">Name</mat-label>
             <input required="required" matInput type="text" placeholder="Eg. John" name="fName" id="fName"
                 [(ngModel)]="fName">
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-input-field">
+        <mat-form-field appearance="outline" class="form-input-field" *ngIf="userType == 'User'">
             <mat-label>Last Name</mat-label>
             <input matInput type="text" placeholder="Eg. Doe" name="lName" id="lName" [(ngModel)]="lName">
         </mat-form-field><br>
@@ -26,7 +28,7 @@
             </mat-hint>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-input-field" id="dobForm">
+        <mat-form-field appearance="outline" class="form-input-field" id="dobForm" *ngIf="userType == 'User'">
             <mat-label>Date of Birth</mat-label>
             <input required="required" matInput [matDatepicker]="picker" name="dob" id="dob" [(ngModel)]="dob">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

@@ -1,24 +1,9 @@
-<!-- <mat-card class = "form-container">
-    <mat-card-title><p>{{isUser?user.name:organisation.name}}</p></mat-card-title>
-    <mat-card-content><p>Email: {{isUser?user.email :organisation.email}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content><p>Phone No: {{isUser?user.phoneNo :organisation.phoneNo}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content><p>Date of Birth: {{isUser?user.dob :organisation.dob}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content><p>Address: {{isUser?user.address :organisation.address}}</p></mat-card-content><br>
-    <mat-divider inset></mat-divider>
-    <mat-card-content *ngIf="isUser"><p>Preference: {{user.preferences}}</p></mat-card-content><br>
-    <mat-divider inset *ngIf="isUser"></mat-divider>
-    <mat-card-content *ngIf="!isUser"><p>Organisation Type: {{organisation.organizationType}}</p></mat-card-content><br>
-    <mat-divider inset *ngIf="!isUser"></mat-divider>
-</mat-card> -->
 <mat-accordion class = "form-container">
     <mat-expansion-panel (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        User
+        {{isUser?"User":"Organization"}}
       </mat-panel-title>
       <mat-panel-description>
         {{isUser?user.name:organisation.name}}
@@ -26,9 +11,129 @@
     </mat-expansion-panel-header>
     <p>Email: {{isUser?user.email :organisation.email}}</p>
     <p>Phone No: {{isUser?user.phoneNo :organisation.phoneNo}}</p>
-    <p>Date of Birth: {{isUser?user.dob :organisation.dob}}</p>
+    <p *ngIf="isUser">Date of Birth: {{isUser?user.dob :organisation.dob}}</p>
     <p>Address: {{isUser?user.address :organisation.address}}</p>
     <p *ngIf="isUser">Preference: {{user.preferences}}</p>
     <p *ngIf="!isUser">Organisation Type: {{organisation.organizationType}}</p>
   </mat-expansion-panel>
 </mat-accordion>
+
+  <mat-accordion class = "form-container" *ngIf="!isUser" style="flex: 1 1 auto;">
+    <mat-expansion-panel (opened)="createEventFormPanelOpenState = true"
+                       (closed)="createEventFormPanelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <button mat-flat-button color="warn">Create Event+</button>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click on the button to create an event
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card class = "form-container createEventForm">
+      <mat-card-title>Create Event</mat-card-title>
+      <form method = "post">
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Event Name</mat-label>
+          <input matInput type="text" placeholder="Ex. Tree Plantation Drive..." name="eventName" id="eventName" [(ngModel)]="eventName">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Event Description</mat-label>
+          <textarea matInput placeholder="Ex. Lorem Ipsum..." name="eventDescription" id="eventDescription" [(ngModel)]="eventDescription"></textarea>
+        </mat-form-field><br>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Rewards</mat-label>
+          <input matInput type="number" placeholder="Ex. 10..." name="eventRewards" id="eventRewards" [(ngModel)]="eventRewards">
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Address</mat-label>
+          <input matInput type="text" placeholder="Ex. Address..." name="eventLocation" id="eventLocation" [(ngModel)]="eventLocation">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>City</mat-label>
+          <input matInput type="text" placeholder="Ex. City..." name="eventCity" id="eventCity" [(ngModel)]="eventCity">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Zip Code</mat-label>
+          <input matInput type="number" placeholder="Ex. 12345..." name="eventZip" id="eventZip" [(ngModel)]="eventZip">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Start Date</mat-label>
+          <input required="required" matInput [matDatepicker]="startDatePicker" name="startDate" id="startDate" [(ngModel)]="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <!-- <mat-hint align="start" *ngIf="dob>currDate" class="errorHint">Invalid Date</mat-hint> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-input-field">
+        <mat-label>End Date</mat-label>
+        <input required="required" matInput [matDatepicker]="endDatePicker" name="endDate" id="endDate" [(ngModel)]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+        <mat-hint align="start" *ngIf="startDate>endDate" class="errorHint">Invalid Date</mat-hint>
+      </mat-form-field>
+
+        <hr/>
+        <mat-card-subtitle>Point of Contact (POC) Details:</mat-card-subtitle>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Name</mat-label>
+          <input matInput type="text" placeholder="Ex. POC Name" name="eventPocName" id="eventPocName" [(ngModel)]="eventPOCName">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Contact</mat-label>
+          <input matInput type="text" placeholder="Ex. POC Contact" name="eventPocContact" id="eventPocContact" [(ngModel)]="eventPOCContact">
+          <mat-hint align="start" *ngIf="eventPOCContact.length!=10 || !isNumber(eventPOCContact)" class="errorHint">Should be 10 digits
+          </mat-hint>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-input-field">
+          <mat-label>Email:</mat-label>
+          <input matInput type="text" placeholder="Ex. POC Email" name="eventPocEmail" id="eventPocEmail" [(ngModel)]="eventPOCEmail">
+        </mat-form-field>
+  
+          <mat-card-actions align = "end">
+              <button mat-button name="createEventBtn" id="createEventBtn" (click)="createEvent()">Create Event</button>
+          </mat-card-actions>
+      </form>
+  </mat-card>
+  </mat-expansion-panel>
+  </mat-accordion>
+
+<hr *ngIf="!isUser" size="10"/>
+
+<div class="col-lg-6" style="float:none;margin:auto;" *ngIf="!isUser">
+  <div class="col-lg-4" style="float:none;margin:auto;">
+    <h2>MY EVENTS</h2>
+  </div>
+  <div class="col-lg-4" style="float:none;margin:auto;">
+    <button mat-flat-button color="primary">Load my events...</button>
+  </div>
+</div>
+
+<hr size="10"/>
+<div class="col-lg-6" style="float:none;margin:auto;">
+  <div class="col-lg-4" style="float:none;margin:auto;">
+    <h2>SEARCH FOR EVENTS</h2>
+  </div>
+  <form class="searchForm" method="post">
+    <input type="text" class="searchBar" name="searchEventsQuery" placeholder="Search Events..." [(ngModel)]="searchEventsQuery">
+    <button class="searchButton" name="searchEventsButton" id="searchEventsButton" (click)="searchEvents()">Search</button>
+  </form>
+</div>
+
+
+<div>
+  {{eventResult}}
+</div>
+
+<!-- <div class="col-lg-6" style="float:none;margin:auto;">
+  <mat-card *ngFor="let event of events">
+    <mat-card-title>
+      {{event.name}}
+    </mat-card-title>
+    <mat-card-content>
+      {{event.description}}
+    </mat-card-content>
+  </mat-card>
+</div> -->

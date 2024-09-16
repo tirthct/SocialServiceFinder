@@ -44,6 +44,8 @@ export class LoginComponent implements OnInit {
 
     if(this.userType == "User"){
       this.loginserviceService.loginUser(this.loginObject).subscribe((res)=>{
+        localStorage.setItem('userDetails', JSON.stringify(res));
+        localStorage.setItem('status',JSON.stringify(true));
         this.dashboardService.setUser(res);
         this.router.navigateByUrl("/dashboard");
 
@@ -58,7 +60,8 @@ export class LoginComponent implements OnInit {
     }
     else if(this.userType == "Organiser"){
       this.loginserviceService.loginOrganiser(this.loginObject).subscribe((res)=>{
-        
+        localStorage.setItem('orgDetails', JSON.stringify(res));
+        localStorage.setItem('status',JSON.stringify(false));
         this.dashboardService.setOrgniser(res);
         this.router.navigateByUrl("/dashboard");
 
